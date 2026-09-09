@@ -1,38 +1,53 @@
 import sqlite3
 import json
 import os
-from datetime import datetime, timedelta
 import sys
 
 def get_app_dir():
-    # Si on tourne dans un binaire PyInstaller
     if getattr(sys, 'frozen', False):
         return os.path.dirname(sys.executable)
-    # Si on tourne en script python normal
     return os.path.abspath(".")
 
 DB_PATH = os.path.join(get_app_dir(), "user_data.db")
 
 def get_connection():
-    conn = sqlite3.connect(DB_PATH, timeout=20.0, check_same_thread=False)
+    conn = sqlite3.connect(DB_PATH, timeout=15.0, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL;")
+    conn.execute("PRAGMA synchronous=NORMAL;")
     return conn
-
 
 def init_db():
     with get_connection() as conn:
         cursor = conn.cursor()
-        
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS profile (
             id INTEGER PRIMARY KEY CHECK (id = 1),
+            height_cm REAL DEFAULT 178.0,
+            weight_kg REAL DEFAULT 70.0,
+            age INTEGER DEFAULT 30,
             hr_rest INTEGER DEFAULT 50,
             hr_max INTEGER DEFAULT 185,
-            vma REAL DEFAULT 15.0
+            vma REAL DEFAULT 15.0,
+            lactate_threshold_hr INTEGER DEFAULT 165
         )
         """)
-        cursor.execute("INSERT OR IGNORE INTO profile (id, hr_rest, hr_max, vma) VALUES (1, 50, 185, 15.0)")
+
+        cursor.execute("PRAGMA table_info(profile)")
+        cols = [r["name"] for r in cursor.fetchall()]
+        if "height_cm" not in cols:
+            cursor.execute("ALTER TABLE profile ADD COLUMN height_cm REAL DEFAULT 178.0")
+        if "weight_kg" not in cols:
+            cursor.execute("ALTER TABLE profile ADD COLUMN weight_kg REAL DEFAULT 70.0")
+        if "age" not in cols:
+            cursor.execute("ALTER TABLE profile ADD COLUMN age INTEGER DEFAULT 30")
+        if "lactate_threshold_hr" not in cols:
+            cursor.execute("ALTER TABLE profile ADD COLUMN lactate_threshold_hr INTEGER DEFAULT 165")
+
+        cursor.execute("""
+        INSERT OR IGNORE INTO profile (id, height_cm, weight_kg, age, hr_rest, hr_max, vma, lactate_threshold_hr)
+        VALUES (1, 178.0, 70.0, 30, 50, 185, 15.0, 165)
+        """)
 
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS activities (
@@ -52,7 +67,6 @@ def init_db():
         )
         """)
 
-        # Table biométrique quotidienne (VFC, Sommeil, FC Repos)
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS daily_health (
             date TEXT PRIMARY KEY,
@@ -64,8 +78,28 @@ def init_db():
         """)
         conn.commit()
 
+def get_user_profile() -> dict:
+    init_db()
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT height_cm, weight_kg, age, hr_rest, hr_max, vma, lactate_threshold_hr FROM profile WHERE id = 1")
+        row = cursor.fetchone()
+        if row:
+            return dict(row)
+        return {"height_cm": 178.0, "weight_kg": 70.0, "age": 30, "hr_rest": 50, "hr_max": 185, "vma": 15.0, "lactate_threshold_hr": 165}
+
+def update_user_profile(height_cm: float, weight_kg: float, age: int, hr_rest: int, hr_max: int, vma: float, lactate_threshold_hr: int):
+    init_db()
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+        UPDATE profile SET
+            height_cm = ?, weight_kg = ?, age = ?, hr_rest = ?, hr_max = ?, vma = ?, lactate_threshold_hr = ?
+        WHERE id = 1
+        """, (height_cm, weight_kg, age, hr_rest, hr_max, vma, lactate_threshold_hr))
+        conn.commit()
+
 def save_daily_health(date_str: str, rhr: int, rmssd: float, sleep_h: float, score: int):
-    """Enregistre ou met à jour le bilan santé du matin."""
     init_db()
     with get_connection() as conn:
         cursor = conn.cursor()
@@ -80,8 +114,14 @@ def save_daily_health(date_str: str, rhr: int, rmssd: float, sleep_h: float, sco
         """, (date_str, rhr, rmssd, sleep_h, score))
         conn.commit()
 
+def get_all_daily_health() -> list:
+    init_db()
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT date, resting_hr, hrv_rmssd, sleep_hours, recovery_score FROM daily_health ORDER BY date DESC")
+        return [dict(r) for r in cursor.fetchall()]
+
 def get_latest_health():
-    """Récupère la dernière entrée de santé enregistrée."""
     init_db()
     with get_connection() as conn:
         cursor = conn.cursor()
@@ -90,7 +130,6 @@ def get_latest_health():
         return dict(row) if row else None
 
 def get_health_baselines(days=30) -> dict:
-    """Calcule les moyennes glissantes de VFC et de FC de repos sur 30 jours."""
     init_db()
     with get_connection() as conn:
         cursor = conn.cursor()
@@ -132,8 +171,7 @@ def save_activity(act: dict) -> bool:
             ))
             conn.commit()
             return True
-        except Exception as e:
-            print(f"[DB Error] : {e}")
+        except Exception:
             return False
 
 def get_all_activities() -> list:
@@ -154,18 +192,3 @@ def get_activity_details(activity_id: int) -> dict:
         data = dict(row)
         data["records"] = json.loads(data["records_json"]) if data.get("records_json") else []
         return data
-
-def get_user_profile() -> dict:
-    init_db()
-    with get_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT hr_rest, hr_max, vma FROM profile WHERE id = 1")
-        row = cursor.fetchone()
-        return dict(row) if row else {"hr_rest": 50, "hr_max": 185, "vma": 15.0}
-
-def update_user_profile(hr_rest: int, hr_max: int, vma: float):
-    init_db()
-    with get_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute("UPDATE profile SET hr_rest = ?, hr_max = ?, vma = ? WHERE id = 1", (hr_rest, hr_max, vma))
-        conn.commit()

@@ -1,0 +1,41 @@
+
+=== NOUVEAU CRASH ===
+Traceback (most recent call last):
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\app.py", line 28, in <module>
+    from ui.main_window import MainWindow
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\main_window.py", line 21, in <module>
+    from ui.health_profile_view import HealthProfileView
+ModuleNotFoundError: No module named 'ui.health_profile_view'
+
+
+=== NOUVEAU CRASH ===
+Traceback (most recent call last):
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\app.py", line 38, in <module>
+    window = MainWindow()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\main_window.py", line 71, in __init__
+    self._setup_tabs()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\main_window.py", line 81, in _setup_tabs
+    self.tab_training = TrainingView()
+                        ~~~~~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\training_view.py", line 50, in __init__
+    self.refresh_data()
+    ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\training_view.py", line 127, in refresh_data
+    form = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 19, in get_athlete_readiness
+    activities = get_all_activities()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\training_db.py", line 164, in get_all_activities
+    init_db()
+    ~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\training_db.py", line 35, in init_db
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+    INSERT OR IGNORE INTO profile (id, height_cm, weight_kg, age, hr_rest, hr_max, vma, lactate_threshold_hr)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    VALUES (1, 178.0, 70.0, 30, 50, 185, 15.0, 165)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """)
+    ^^^^
+sqlite3.OperationalError: table profile has no column named height_cm
+

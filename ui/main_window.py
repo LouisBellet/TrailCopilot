@@ -83,7 +83,8 @@ class MainWindow(QMainWindow):
 
         self.tab_health = HealthProfileView()
         self.tab_health.profile_updated.connect(self.tab_training.refresh_data)
-        self.tab_widget.addTab(self.tab_health, "🩺 Bilan Santé & Profil")
+        self.tab_training.activity_imported.connect(self.tab_health.refresh_coach_view)
+        self.tab_widget.addTab(self.tab_health, "🎯 Conseiller Tactique & Profil")
 
         self.setCentralWidget(self.tab_widget)
 

@@ -17,6 +17,7 @@ from core.feasibility_engine import FeasibilityEngine
 from core.workload_engine import WorkloadEngine
 from ui.map_view import MapView
 from ui.elevation_chart import ElevationChart
+from ui.home_view import HomeView
 from ui.training_view import TrainingView
 from ui.health_profile_view import HealthProfileView
 
@@ -62,8 +63,8 @@ class AnalysisWorker(QThread):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Mountain Scout — Terrain, Entraînement & Physiologie")
-        self.resize(1440, 920)
+        self.setWindowTitle("Mountain Scout — Décision Tactique & Charge Scientifique")
+        self.resize(1460, 930)
         self.routes = []
         self.active_index = -1
         self.worker = None
@@ -74,19 +75,33 @@ class MainWindow(QMainWindow):
     def _setup_tabs(self):
         self.tab_widget = QTabWidget()
 
+        # 1. Onglet d'Accueil & Dashboard
+        self.tab_home = HomeView()
+        self.tab_widget.addTab(self.tab_home, "🏠 Accueil & Synthèse")
+
+        # 2. Onglet Entraînement
+        self.tab_training = TrainingView()
+        self.tab_widget.addTab(self.tab_training, "📈 Entraînement")
+
+        # 3. Onglet Conseiller & Profil
+        self.tab_coach = HealthProfileView()
+        self.tab_widget.addTab(self.tab_coach, "🎯 Conseiller & Profil")
+
+        # 4. Onglet Exploration Tactique
         self.tab_explore = QWidget()
         self._setup_explore_ui(self.tab_explore)
-        self.tab_widget.addTab(self.tab_explore, "🧭 Exploration & Décision Tactique")
+        self.tab_widget.addTab(self.tab_explore, "🧭 Exploration Tactique")
 
-        self.tab_training = TrainingView()
-        self.tab_widget.addTab(self.tab_training, "📈 Mon Entraînement")
-
-        self.tab_health = HealthProfileView()
-        self.tab_health.profile_updated.connect(self.tab_training.refresh_data)
-        self.tab_training.activity_imported.connect(self.tab_health.refresh_coach_view)
-        self.tab_widget.addTab(self.tab_health, "🎯 Conseiller Tactique & Profil")
+        # Liaisons dynamiques entre onglets
+        self.tab_training.activity_imported.connect(self.on_data_updated)
+        self.tab_coach.profile_updated.connect(self.on_data_updated)
 
         self.setCentralWidget(self.tab_widget)
+
+    def on_data_updated(self):
+        self.tab_home.refresh_dashboard()
+        self.tab_training.refresh_data()
+        self.tab_coach.refresh_coach_view()
 
     def _setup_explore_ui(self, parent_widget):
         main_layout = QVBoxLayout(parent_widget)
@@ -251,7 +266,7 @@ class MainWindow(QMainWindow):
         <h3>Simulation Pré-Course (What-If) :</h3>
         <div style='background:#242933; border-left:4px solid {sim['advice_color']}; padding:10px; border-radius:4px;'>
             <p style='margin:0;'><b>Durée estimée :</b> {sim['duration_str']} | <b>Charge projetée (TRIMP) :</b> +{sim['projected_trimp']}</p>
-            <p style='margin:4px 0 0 0;'><b>Évolution ACWR :</b> {sim['current_acwr']} ➔ <b>{sim['new_acwr']}</b></p>
+            <p style='margin:4px 0 0 0;'><b>Évolution ACWR :</b> {sim['current_acwr']} ➔ <b>{sim['new_acwr']}</b> (Risque de blessure : {sim['new_risk']}%)</p>
             <p style='margin:4px 0 0 0; color:{sim['advice_color']};'><b>Verdict :</b> {sim['advice']}</p>
         </div>
 

@@ -1,17 +1,18 @@
-from PySide6.QtCore import Qt, Signal
+from PySide6.QtCore import Signal
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QGroupBox, QDoubleSpinBox, QSpinBox, QMessageBox, QScrollArea,
     QGridLayout, QFrame
 )
 from core.training_db import get_user_profile, update_user_profile
-from core.coach_engine import CoachEngine
+from core.data_manager import DataManager
 
 class HealthProfileView(QWidget):
     profile_updated = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.is_loaded = False
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(10, 10, 10, 10)
 
@@ -30,8 +31,12 @@ class HealthProfileView(QWidget):
         scroll.setWidget(container)
         main_layout.addWidget(scroll)
 
-        self.load_profile()
-        self.refresh_coach_view()
+    def ensure_loaded(self):
+        if not self.is_loaded or DataManager.is_tab_dirty(2):
+            self.load_profile()
+            self.refresh_coach_view()
+            self.is_loaded = True
+            DataManager.mark_tab_clean(2)
 
     def _init_profile_section(self):
         grp_profile = QGroupBox("Constantes Corporelles & Physiologiques (Persistantes)")
@@ -99,7 +104,7 @@ class HealthProfileView(QWidget):
         self.layout.addWidget(self.grp_summary)
 
     def _init_coach_section(self):
-        self.grp_coach = QGroupBox("Conseiller Quotidien — 3 Options Complètes & Combinées")
+        self.grp_coach = QGroupBox("Conseiller Tactique Prédictif — Projections à J+1")
         c_layout = QVBoxLayout(self.grp_coach)
 
         self.banner_status = QLabel()
@@ -122,6 +127,9 @@ class HealthProfileView(QWidget):
             lbl_title.setWordWrap(True)
             lbl_title.setStyleSheet("font-size: 13px; font-weight: bold; color: #4FD1C5;")
 
+            lbl_proj = QLabel()
+            lbl_proj.setStyleSheet("background:#242933; color:#38B2AC; font-size:12px; font-weight:bold; padding:4px 6px; border-radius:3px;")
+
             lbl_timing = QLabel()
             lbl_timing.setStyleSheet("color: #63B3ED; font-size: 11px; font-weight: bold;")
 
@@ -138,6 +146,7 @@ class HealthProfileView(QWidget):
 
             box_layout.addWidget(lbl_tag)
             box_layout.addWidget(lbl_title)
+            box_layout.addWidget(lbl_proj)
             box_layout.addWidget(lbl_timing)
             box_layout.addWidget(lbl_rec)
             box_layout.addWidget(QLabel("<b>Programme détaillé :</b>"))
@@ -148,7 +157,8 @@ class HealthProfileView(QWidget):
             cards_layout.addWidget(box)
             self.card_boxes.append({
                 "box": box, "tag": lbl_tag, "title": lbl_title,
-                "timing": lbl_timing, "rec": lbl_rec, "prog": lbl_prog, "tact": lbl_tact
+                "proj": lbl_proj, "timing": lbl_timing, "rec": lbl_rec,
+                "prog": lbl_prog, "tact": lbl_tact
             })
 
         c_layout.addLayout(cards_layout)
@@ -169,12 +179,13 @@ class HealthProfileView(QWidget):
             self.spin_age.value(), self.spin_rhr.value(),
             self.spin_hrmax.value(), self.spin_vma.value(), 165
         )
-        QMessageBox.information(self, "Profil Enregistré", "Paramètres sauvegardés. Les allures cibles et conseils ont été recalculés.")
+        DataManager.invalidate_cache()
+        QMessageBox.information(self, "Profil Enregistré", "Paramètres sauvegardés. Le budget TRIMP et les projections ont été recalculés.")
         self.refresh_coach_view()
         self.profile_updated.emit()
 
     def refresh_coach_view(self):
-        summary = CoachEngine.get_7day_summary()
+        summary = DataManager.get_summary_7d()
         self.lbl_sum_sess.setText(f"<b>Séances :</b> {summary['sessions_count']}")
         self.lbl_sum_dur.setText(f"<b>Volume :</b> {summary['duration_str']}")
         self.lbl_sum_dist.setText(f"<b>Distance :</b> {summary['distance_km']} km")
@@ -182,7 +193,7 @@ class HealthProfileView(QWidget):
         self.lbl_sum_dminus.setText(f"<b>D- :</b> -{summary['d_minus']} m")
         self.lbl_sum_trimp.setText(f"<b>Charge TRIMP :</b> {summary['total_trimp']}")
 
-        advice = CoachEngine.generate_daily_advice()
+        advice = DataManager.get_coach_advice()
         self.banner_status.setText(f"[{advice['badge']}] — {advice['status_text']}")
         self.banner_status.setStyleSheet(
             f"background-color: {advice['status_color']}; padding: 8px 12px; border-radius: 4px; font-weight: bold; color: white;"
@@ -192,6 +203,7 @@ class HealthProfileView(QWidget):
             card = self.card_boxes[i]
             card["tag"].setText(opt["tag"].upper())
             card["title"].setText(opt["title"])
+            card["proj"].setText(f"Impact : +{int(opt.get('trimp', 0))} TRIMP ➔ ACWR Demain : {opt.get('proj_acwr', '--')}")
             card["timing"].setText(f"⏰ {opt['timing']}")
             card["rec"].setText(f"⏳ Temps de récupération estimé : {opt['recovery_time']}")
             prog_text = "<br>• " + "<br>• ".join(opt["program"])

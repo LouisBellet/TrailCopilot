@@ -39,3 +39,2016 @@ Traceback (most recent call last):
     ^^^^
 sqlite3.OperationalError: table profile has no column named height_cm
 
+
+=== NOUVEAU CRASH ===
+Traceback (most recent call last):
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\app.py", line 38, in <module>
+    window = MainWindow()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\main_window.py", line 72, in __init__
+    self._setup_tabs()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\main_window.py", line 79, in _setup_tabs
+    self.tab_home = HomeView()
+                    ~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\home_view.py", line 28, in __init__
+    self.refresh_dashboard()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\home_view.py", line 100, in refresh_dashboard
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 61, in get_athlete_readiness
+    t_sum = sum(
+        float(a.get("duration_min", 0.0)) for a in activities
+        if (day_target - parse_date_safe(a["start_time"]).date()).days == 0
+    )
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 63, in <genexpr>
+    if (day_target - parse_date_safe(a["start_time"]).date()).days == 0
+                     ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 9, in parse_date_safe
+    return datetime.strptime(clean, fmt)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\louis\AppData\Local\Programs\Python\Python313\Lib\_strptime.py", line 789, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\louis\AppData\Local\Programs\Python\Python313\Lib\_strptime.py", line 612, in _strptime
+    day = parse_int(found_dict['d'])
+KeyboardInterrupt
+
+
+=== NOUVEAU CRASH ===
+Traceback (most recent call last):
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\app.py", line 38, in <module>
+    window = MainWindow()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\main_window.py", line 72, in __init__
+    self._setup_tabs()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\main_window.py", line 79, in _setup_tabs
+    self.tab_home = HomeView()
+                    ~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\home_view.py", line 28, in __init__
+    self.refresh_dashboard()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\home_view.py", line 100, in refresh_dashboard
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 90, in get_athlete_readiness
+    advice = CoachEngine.generate_daily_advice()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\coach_engine.py", line 94, in generate_daily_advice
+    readiness = WorkloadEngine.get_athlete_readiness()
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 61, in get_athlete_readiness
+    t_sum = sum(
+        float(a.get("duration_min", 0.0)) for a in activities
+        if (day_target - parse_date_safe(a["start_time"]).date()).days == 0
+    )
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 63, in <genexpr>
+    if (day_target - parse_date_safe(a["start_time"]).date()).days == 0
+                     ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\core\workload_engine.py", line 9, in parse_date_safe
+    return datetime.strptime(clean, fmt)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\louis\AppData\Local\Programs\Python\Python313\Lib\_strptime.py", line 789, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\louis\AppData\Local\Programs\Python\Python313\Lib\_strptime.py", line 516, in _strptime
+    def _strptime(data_string, format="%a %b %d %H:%M:%S %Y"):
+    
+KeyboardInterrupt
+

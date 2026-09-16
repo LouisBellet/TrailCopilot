@@ -1,23 +1,20 @@
-from datetime import datetime
-from core.training_db import get_all_activities, get_user_profile
-from core.workload_engine import WorkloadEngine
+from datetime import datetime, timedelta
+
+def parse_date_only(date_str: str):
+    clean = str(date_str).replace("T", " ").split(".")[0].strip()[:10]
+    return datetime.strptime(clean, "%Y-%m-%d").date()
 
 class CoachEngine:
     @staticmethod
-    def get_7day_summary() -> dict:
-        activities = get_all_activities()
+    def compute_7day_summary(activities: list) -> dict:
         today = datetime.now().date()
-
         t_dur, t_dist, t_dp, t_dm, t_trimp, count = 0.0, 0.0, 0.0, 0.0, 0.0, 0
+
         for a in activities:
-            clean = str(a["start_time"]).replace("T", " ").split(".")[0].strip()
             try:
-                act_date = datetime.strptime(clean, "%Y-%m-%d %H:%M:%S").date()
-            except ValueError:
-                try:
-                    act_date = datetime.strptime(clean, "%Y-%m-%d").date()
-                except ValueError:
-                    continue
+                act_date = parse_date_only(a["start_time"])
+            except Exception:
+                continue
 
             if 0 <= (today - act_date).days <= 6:
                 count += 1
@@ -36,12 +33,41 @@ class CoachEngine:
         }
 
     @staticmethod
-    def generate_daily_advice() -> dict:
-        readiness = WorkloadEngine.get_athlete_readiness()
-        profile = get_user_profile()
+    def project_ewma_acwr(load_trimp: float, ewma_a: float, ewma_c: float) -> float:
+        l_a = 2.0 / 8.0
+        l_c = 2.0 / 29.0
+        next_a = (load_trimp * l_a + (1.0 - l_a) * ewma_a) * 7.0
+        next_c = (load_trimp * l_c + (1.0 - l_c) * ewma_c) * 7.0
+        if next_c < 3.0:
+            return 0.0 if next_a < 3.0 else min(2.5, round(next_a / 8.0, 2))
+        return round(next_a / next_c, 2)
 
-        acwr = readiness.get("acwr", 1.0)
-        risk = readiness.get("injury_risk_pct", 3.3)
+    @staticmethod
+    def compute_daily_advice(activities: list, profile: dict, cur_acwr: float) -> dict:
+        today = datetime.now().date()
+        daily_map = {}
+        for a in activities:
+            d = parse_date_only(a["start_time"])
+            daily_map[d] = daily_map.get(d, 0.0) + float(a.get("trimp", 0.0))
+
+        l_a = 2.0 / 8.0
+        l_c = 2.0 / 29.0
+        curr_date = today - timedelta(days=60)
+        ewma_a = 0.0
+        ewma_c = 0.0
+
+        while curr_date <= today:
+            load = daily_map.get(curr_date, 0.0)
+            ewma_a = load * l_a + (1.0 - l_a) * ewma_a
+            ewma_c = load * l_c + (1.0 - l_c) * ewma_c
+            curr_date += timedelta(days=1)
+
+        # Calcul analytique du budget TRIMP pour viser ACWR = 1.05 demain
+        target_acwr = 1.05
+        num = target_acwr * (1.0 - l_c) * ewma_c - (1.0 - l_a) * ewma_a
+        denom = l_a - target_acwr * l_c
+        ideal_trimp = max(0.0, round(num / denom, 1)) if denom > 0 else 25.0
+
         vma = profile.get("vma", 15.0)
         hr_rest = profile.get("hr_rest", 50)
         hr_max = profile.get("hr_max", 185)
@@ -51,143 +77,174 @@ class CoachEngine:
         z4_bpm = f"{int(hr_rest + res * 0.82)}-{int(hr_rest + res * 0.90)} bpm"
         pace_z2 = f"{int(60.0/(vma*0.65))}'{int(((60.0/(vma*0.65))%1)*60):02d}\"/km"
 
-        if acwr > 1.35 or risk > 6.0:
-            badge = "RÉCUPÉRATION & RÉGÉNÉRATION TISSULAIRE"
-            status_text = f"Surcharge détectée (ACWR: {acwr} | Risque blessure: {risk}%). Priorité au relâchement musculaire."
+        if cur_acwr > 1.35:
+            badge = "SURCHARGE — RÉDUCTION DE FATIGUE CIBLÉE"
+            status_text = f"ACWR élevé ({cur_acwr}). Laisser la fatigue chuter naturellement vers 1.10."
             status_color = "#E53E3E"
+            t1, t2, t3 = 15.0, 25.0, 0.0
 
             opt1 = {
-                "title": "Option 1 : Protocole Yoga Restauratif & Décompression Lombaire",
-                "tag": "Récupération Active / Passive",
-                "timing": "Créneau conseillé : Soir avant le coucher (19h00 - 21h00)",
-                "recovery_time": "12 h à 18 h avant la prochaine séance",
-                "program": [
-                    "Posture de l'Enfant (Balasana) : 3 séries de 1 min 30 s (respiration ventrale lente)",
-                    "Chien tête en bas doux (Adho Mukha) : 4 x 45 s avec pédalage doux des talons",
-                    "Torsion vertébrale au sol (Supta Matsyendrasana) : 2 min par côté",
-                    "Jambes surélevées contre le mur (Viparita Karani) : 8 min complètes"
-                ],
-                "tactical_note": "Hydratation alcaline (eau riche en bicarbonates), aucun impact excentrique."
-            }
-            opt2 = {
-                "title": "Option 2 : Routine Réveil Articulaire + Étirements Ischio-Jambiers/Psoas",
-                "tag": "Mobilité & Souplesse",
-                "timing": "Créneau conseillé : Matin (8h00 - 9h30)",
+                "title": "Option 1 : Protocole Décompression & Yoga Restauratif",
+                "tag": "Mobilité & Récupération",
+                "trimp": t1,
+                "proj_acwr": CoachEngine.project_ewma_acwr(t1, ewma_a, ewma_c),
+                "timing": "Créneau : Soirée (19h00 - 20h30)",
                 "recovery_time": "12 h",
                 "program": [
-                    "Cercles articulaires chevilles et hanches : 2 x 15 rotations lentes par sens",
-                    "Étirement actif du Psoas (fente basse au sol avec rétroversion du bassin) : 3 x 45 s / côté",
-                    "Étirement chaînes postérieures (avec sangle ou élastique sur le dos) : 3 x 1 min / jambe",
-                    "Foam Roller (automassage mollets et bandelette ilio-tibiale) : 2 min par groupe musculaire"
+                    "Posture de l'Enfant (Balasana) : 3 séries de 1 min 30 s respiration diaphragmatique",
+                    "Chien tête en bas doux : 4 x 45 s avec alternance talons au sol",
+                    "Étirement chaîne postérieure à la sangle : 2 min par côté",
+                    "Surélévation des jambes au mur (Viparita Karani) : 10 min complètes"
                 ],
-                "tactical_note": "Ne jamais forcer jusqu'à la douleur aiguë. Travaillez sur l'expiration."
+                "tactical_note": "Zéro contrainte excentrique. Accélère la baisse de l'ACWR."
             }
-            opt3 = {
-                "title": "Option 3 : Décrassage doux Vélo sans résistance",
-                "tag": "Drainage Métabolique",
-                "timing": "Créneau conseillé : Milieu de journée (12h30 ou 16h00)",
+            opt2 = {
+                "title": "Option 2 : Décrassage doux sur Home-Trainer ou Vélo plat",
+                "tag": "Drainage Actif",
+                "trimp": t2,
+                "proj_acwr": CoachEngine.project_ewma_acwr(t2, ewma_a, ewma_c),
+                "timing": "Créneau : Fin d'après-midi (17h00 - 18h00)",
                 "recovery_time": "18 h",
                 "program": [
-                    "35 à 45 min de home-trainer ou vélo de route à plat",
-                    "Cadence constante de 90-95 rpm, FC strictement inférieure à 60% FC Max",
-                    "5 min de marche pieds nus sur herbe pour la proprioception plantaire"
+                    "35 min de moulinage très fluide (cadence 90-95 rpm)",
+                    "Intensité Z1 stricte (FC < 60% FC Max)",
+                    "10 min d'automassage au rouleau (mollets et quadriceps)"
                 ],
-                "tactical_note": "Consommer 500 ml d'eau avec électrolytes pendant la séance."
-            }
-
-        elif acwr < 0.80:
-            badge = "DÉVELOPPEMENT & STIMULATION DE VOLUME"
-            status_text = f"Sous-charge relative (ACWR: {acwr} | Risque blessure: {risk}%). Fenêtre ouverte pour augmenter le volume aérobie."
-            status_color = "#3182CE"
-
-            opt1 = {
-                "title": "Option 1 (Combiné Matin + Soir) : Réveil Articulaire PUIS Sortie Trail Longue",
-                "tag": "Double Séance Combinée",
-                "timing": "Séance 1 : 08h00 (Mobilité 15 min) | Séance 2 : 14h30 (Trail 2h00)",
-                "recovery_time": "36 h à 48 h de récupération avant un nouvel effort intense",
-                "program": [
-                    "Séance 1 (08h00) : Réveil articulaire cheville/bassin + 10 min de gainage abdominal dynamique",
-                    "Séance 2 (14h30) : 1h45 à 2h15 en terrain montagnard (+600m à +900m D+)",
-                    "Intensité cible : Z2 continue en montée active aux bâtons (FC: " + z2_bpm + ")",
-                    "Descente progressive sans survitesse pour réadapter les fibres musculaires"
-                ],
-                "tactical_note": "Prévoyez 40 g de glucides par heure d'effort en montagne et 600 ml d'eau/h."
-            }
-            opt2 = {
-                "title": "Option 2 : Sortie Route Fondamentale avec variations d'allure",
-                "tag": "Course sur Route",
-                "timing": "Créneau conseillé : Fin de matinée (10h00 - 11h30)",
-                "recovery_time": "24 h",
-                "program": [
-                    "15 min échauffement Z1 progressif",
-                    "50 min en endurance fondamentale stable (allure cible: " + pace_z2 + ")",
-                    "5 x 100m en lignes droites accélérées (foulée relâchée, récupération retour marché)",
-                    "10 min retour au calme"
-                ],
-                "tactical_note": "Excellente séance pour renforcer le réseau capillaire et la lipolyse."
+                "tactical_note": "Hydratation alcaline pour tamponner l'acidité musculaire."
             }
             opt3 = {
-                "title": "Option 3 : Sortie longue Vélo de Route ou Ski de Randonnée",
-                "tag": "Socle Cardiaque Sans Choc",
-                "timing": "Créneau conseillé : Matinée complète (09h00 - 12h00)",
-                "recovery_time": "24 h à 36 h",
+                "title": "Option 3 : Repos Complet & Sommeil Restaurateur",
+                "tag": "Régénération Totale",
+                "trimp": t3,
+                "proj_acwr": CoachEngine.project_ewma_acwr(t3, ewma_a, ewma_c),
+                "timing": "Journée complète de repos",
+                "recovery_time": "Prêt pour demain matin",
                 "program": [
-                    "2h30 à 3h15 d'endurance continue à 65-72% FC Max",
-                    "En ski de rando : montée fluide sans à-coups, conversions propres et travail des appuis",
-                    "15 min d'étirements doux des quadriceps et fessiers au retour"
+                    "Aucune activité sportive programmée",
+                    "Hydratation régulière (2 litres d'eau)",
+                    "Objectif 8h30 de sommeil réparateur"
                 ],
-                "tactical_note": "Permet d'accumuler du temps de soutien aérobie sans fatigue mécanique ostéo-articulaire."
+                "tactical_note": "Permet à l'ACWR de glisser vers la zone optimale dès demain."
             }
-
-        else:
-            badge = "ZONE OPTIMALE — TRAVAIL DE QUALITÉ & DÉNIVELÉ"
-            status_text = f"Sweet Spot atteint (ACWR: {acwr} | Risque blessure: {risk}%). Fenêtre idéale pour progresser."
-            status_color = "#38A169"
+        elif cur_acwr < 0.85:
+            badge = "STIMULATION DE CHARGE — PROGRESSION POSITIVE"
+            status_text = f"Sous-charge ({cur_acwr}). Pour relancer la condition physique, un apport de ~{ideal_trimp} TRIMP est idéal."
+            status_color = "#3182CE"
+            t1 = max(60.0, round(ideal_trimp * 1.15, 1))
+            t2 = max(45.0, round(ideal_trimp, 1))
+            t3 = max(25.0, round(ideal_trimp * 0.65, 1))
 
             opt1 = {
-                "title": "Option 1 : Fractionné en Côte Spécifique Montagne / Trail",
-                "tag": "Puissance Aérobie en Côte",
-                "timing": "Créneau conseillé : Après-midi (15h30 - 17h00)",
-                "recovery_time": "48 h avant une autre séance de seuil ou de D+",
-                "program": [
-                    "20 min échauffement en endurance douce à plat",
-                    "Éducatifs de pied : 2 x 30 m montées de genoux + talons-fesses",
-                    "Corps de séance : 8 à 10 répétitions de 1 min 15 s dynamique en côte (pente 8-12%)",
-                    "Cible cardiaque au sommet des réps : " + z4_bpm,
-                    "Récupération : descente en marchant/trottant lentement",
-                    "10 min de footing de régénération à plat"
-                ],
-                "tactical_note": "Gardez le buste droit et le regard vers l'avant dans la côte. Ne cherchez pas à allonger la foulée."
-            }
-            opt2 = {
-                "title": "Option 2 (Combiné Midi + Soir) : Allure Seuil Course PUIS Yoga Récupération",
-                "tag": "Séance Clé + Récupération Soir",
-                "timing": "Séance 1 : 12h30 (Course au Seuil) | Séance 2 : 20h00 (Yoga 25 min)",
+                "title": "Option 1 : Rando-Course avec Dénivelé Trail (D+)",
+                "tag": "Montagne & Pentes",
+                "trimp": t1,
+                "proj_acwr": CoachEngine.project_ewma_acwr(t1, ewma_a, ewma_c),
+                "timing": "Créneau : Matinée ou début d'après-midi",
                 "recovery_time": "36 h",
                 "program": [
-                    "Séance 1 (12h30) : 15 min échauffement + 3 x 8 min à allure Seuil 1 (récupération 2 min trot lent) + 10 min calme",
-                    "Séance 2 (20h00) : 25 min de Yoga Vinyasa doux centré sur l'ouverture de hanches et les mollets",
-                    "3 séries de 45 s de pigeon pose (Eka Pada Rajakapotasana) par côté"
+                    "1h30 à 2h00 sur sentier technique (+500m à +800m D+)",
+                    "Montée : marche active bâtons en main (FC : " + z2_bpm + ")",
+                    "Descentes : foulée souple sans prise de risque",
+                    "10 min d'étirements doux au retour"
                 ],
-                "tactical_note": "La séance de yoga le soir même réduit les courbatures du lendemain de 40%."
+                "tactical_note": "Prendre 500 ml d'eau avec électrolytes."
+            }
+            opt2 = {
+                "title": "Option 2 : Sortie Longue Aérobie sur Route / Plat",
+                "tag": "Endurance Fondamentale",
+                "trimp": t2,
+                "proj_acwr": CoachEngine.project_ewma_acwr(t2, ewma_a, ewma_c),
+                "timing": "Créneau : Matin (09h00 - 11h00)",
+                "recovery_time": "24 h",
+                "program": [
+                    "15 min d'échauffement progressif",
+                    "50 min en endurance fondamentale calée à l'allure cible (" + pace_z2 + ")",
+                    "5 lignes droites de 80 m en accélération progressive",
+                    "5 min de marche de retour au calme"
+                ],
+                "tactical_note": "Foulée médio-pied économique et relâchée."
             }
             opt3 = {
-                "title": "Option 3 : Circuit PPG Montagne (Isométrie & Excentrique)",
-                "tag": "Prévention Casse Musculaire D-",
-                "timing": "Créneau conseillé : Matin ou début de soirée",
-                "recovery_time": "24 h à 36 h",
+                "title": "Option 3 : Sortie Endurance Croisée Vélo / Ski de Rando",
+                "tag": "Volume Sans Choc",
+                "trimp": t3,
+                "proj_acwr": CoachEngine.project_ewma_acwr(t3, ewma_a, ewma_c),
+                "timing": "Créneau : Après-midi (14h00 - 16h30)",
+                "recovery_time": "24 h",
                 "program": [
-                    "4 tours de circuit (1 min 30 s de repos entre les tours) :",
-                    "• Chaise dos au mur : 45 s maintien isométrique strict",
-                    "• Fentes avant ralenties (descente en 3 secondes) : 12 répétitions par jambe",
-                    "• Montées sur pointes de pieds sur marche d'escalier : 20 répétitions",
-                    "• Gainage ventral planche active : 1 min",
-                    "20 min de home-trainer ou footing très lent pour évacuer les tensions"
+                    "2h00 en aisance respiratoire continue (Z1/Z2)",
+                    "En ski de rando : rythme cardiaque stable et conversions fluides",
+                    "15 min de gainage abdominal au retour"
                 ],
-                "tactical_note": "Ce travail renforce la résistance des tendons rotuliens et des quadriceps pour les descentes de trail."
+                "tactical_note": "Développe le cardio sans impacter les tendons d'Achille."
+            }
+        else:
+            badge = "SWEET SPOT — TRAVAIL QUALITATIF & DÉVELOPPEMENT"
+            status_text = f"Progression optimale ({cur_acwr}). Dose préconisée aujourd'hui : ~{ideal_trimp} TRIMP."
+            status_color = "#38A169"
+            t1 = max(55.0, round(ideal_trimp * 1.10, 1))
+            t2 = max(40.0, round(ideal_trimp * 0.90, 1))
+            t3 = max(20.0, round(ideal_trimp * 0.50, 1))
+
+            opt1 = {
+                "title": "Option 1 : Répétitions en Côte Spécifiques Trail",
+                "tag": "Puissance & VMA en Côte",
+                "trimp": t1,
+                "proj_acwr": CoachEngine.project_ewma_acwr(t1, ewma_a, ewma_c),
+                "timing": "Créneau : Après-midi (16h00 - 17h30)",
+                "recovery_time": "48 h",
+                "program": [
+                    "20 min footing d'échauffement à plat",
+                    "Éducatifs : montées de genoux et griffés",
+                    "Corps de séance : 8 répétitions de 1 min dynamique en côte (pente 8-12%)",
+                    "Intensité sommet : FC " + z4_bpm + " (Borg 16-17)",
+                    "Descente lente en trot/marche pour récupérer",
+                    "10 min footing très lent de retour au calme"
+                ],
+                "tactical_note": "Buste gainé, regard vers le haut de la pente."
+            }
+            opt2 = {
+                "title": "Option 2 (Combiné Midi + Soir) : Allure Tempo PUIS Yoga Récupération",
+                "tag": "Séance Clé + Récupération",
+                "trimp": t2,
+                "proj_acwr": CoachEngine.project_ewma_acwr(t2, ewma_a, ewma_c),
+                "timing": "Séance 1 : 12h30 (Course 45 min) | Séance 2 : 20h30 (Yoga 20 min)",
+                "recovery_time": "36 h",
+                "program": [
+                    "Séance 1 (12h30) : 15 min échauffement + 3 x 7 min tempo dynamique + 5 min calme",
+                    "Séance 2 (20h30) : 20 min de postures au sol pour étirer fessiers, ischios et mollets"
+                ],
+                "tactical_note": "Apporte le stimulus cardio tout en facilitant le sommeil."
+            }
+            opt3 = {
+                "title": "Option 3 : Circuit PPG Trail + Isométrie Quadriceps",
+                "tag": "Renforcement Excentrique D-",
+                "trimp": t3,
+                "proj_acwr": CoachEngine.project_ewma_acwr(t3, ewma_a, ewma_c),
+                "timing": "Créneau : Matin ou fin d'après-midi",
+                "recovery_time": "24 h",
+                "program": [
+                    "4 tours complets (1 min 30 s de repos entre les séries) :",
+                    "• Chaise dos au mur : 45 secondes maintien strict",
+                    "• Fentes avant ralenties (descente en 3 s) : 10 par jambe",
+                    "• Montées sur pointes de pieds : 20 répétitions",
+                    "• Planche ventrale gainage actif : 1 minute",
+                    "15 min de décrassage sur vélo sans résistance"
+                ],
+                "tactical_note": "Renforce la résistance des quadriceps pour les longues descentes."
             }
 
+        projections = [
+            {"label": "Opt 1", "trimp": opt1["trimp"], "projected_acwr": opt1["proj_acwr"], "color": "#F6AD55"},
+            {"label": "Opt 2", "trimp": opt2["trimp"], "projected_acwr": opt2["proj_acwr"], "color": "#38B2AC"},
+            {"label": "Opt 3", "trimp": opt3["trimp"], "projected_acwr": opt3["proj_acwr"], "color": "#63B3ED"}
+        ]
+
         return {
-            "badge": badge, "status_text": status_text,
-            "status_color": status_color, "options": [opt1, opt2, opt3]
+            "badge": badge,
+            "status_text": status_text,
+            "status_color": status_color,
+            "target_budget": ideal_trimp,
+            "options": [opt1, opt2, opt3],
+            "projections": projections
         }

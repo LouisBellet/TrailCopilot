@@ -12,9 +12,10 @@ from PySide6.QtWidgets import (
 
 from core.conditions_checker import get_recent_weather, get_avalanche_risk
 from core.satellite_analyzer import analyze_snow_coverage
-from core.scraper_c2c import search_routes, PYRENEES_MASTER_DATABASE
+from core.scraper_c2c import search_routes
 from core.feasibility_engine import FeasibilityEngine
 from core.workload_engine import WorkloadEngine
+from core.data_manager import DataManager
 from ui.map_view import MapView
 from ui.elevation_chart import ElevationChart
 from ui.home_view import HomeView
@@ -22,14 +23,14 @@ from ui.training_view import TrainingView
 from ui.health_profile_view import HealthProfileView
 
 MASSIFS = {
-    "Pyrénées — Gavarnie & Vignemale": {"center": [42.7290, -0.0450], "bbox": [-0.15, 42.68, 0.05, 42.80], "bera": "HAUTE-BIGORRE"},
-    "Pyrénées — Néouvielle & Lacs": {"center": [42.8350, 0.1420], "bbox": [0.08, 42.78, 0.22, 42.89], "bera": "HAUTE-BIGORRE"},
-    "Pyrénées — Vallée d'Ossau & Ayous": {"center": [42.8420, -0.4350], "bbox": [-0.52, 42.79, -0.35, 42.91], "bera": "ASPE-OSSAU"},
-    "Pyrénées — Cauterets & Gaube": {"center": [42.8550, -0.1150], "bbox": [-0.18, 42.78, -0.06, 42.89], "bera": "HAUTE-BIGORRE"},
-    "Pyrénées — Luchonnais & Vénasque": {"center": [42.7200, 0.5850], "bbox": [0.50, 42.66, 0.65, 42.78], "bera": "LUCHONNAIS"},
-    "Pyrénées — Carlit & Bouillouses": {"center": [42.5700, 1.9900], "bbox": [1.90, 42.52, 2.06, 42.62], "bera": "CERDAGNE-CANIGOU"},
-    "Pyrénées — Massif du Canigou": {"center": [42.5180, 2.4560], "bbox": [2.40, 42.47, 2.52, 42.56], "bera": "CERDAGNE-CANIGOU"},
-    "Alpes — Mont-Blanc": {"center": [45.8600, 6.7400], "bbox": [6.70, 45.80, 7.05, 46.05], "bera": "MONT-BLANC"}
+    "Pyrénées — Gavarnie & Vignemale": {"center": [42.7290, -0.0450], "bbox": [-0.30, 42.60, 0.15, 42.85], "bera": "HAUTE-BIGORRE"},
+    "Pyrénées — Néouvielle & Lacs": {"center": [42.8350, 0.1420], "bbox": [0.02, 42.72, 0.28, 42.92], "bera": "HAUTE-BIGORRE"},
+    "Pyrénées — Vallée d'Ossau & Ayous": {"center": [42.8420, -0.4350], "bbox": [-0.60, 42.72, -0.30, 42.95], "bera": "ASPE-OSSAU"},
+    "Pyrénées — Cauterets & Gaube": {"center": [42.8550, -0.1150], "bbox": [-0.25, 42.72, 0.00, 42.94], "bera": "HAUTE-BIGORRE"},
+    "Pyrénées — Luchonnais & Vénasque": {"center": [42.7200, 0.5850], "bbox": [0.40, 42.60, 0.75, 42.85], "bera": "LUCHONNAIS"},
+    "Pyrénées — Carlit & Bouillouses": {"center": [42.5700, 1.9900], "bbox": [1.80, 42.48, 2.15, 42.68], "bera": "CERDAGNE-CANIGOU"},
+    "Pyrénées — Massif du Canigou": {"center": [42.5180, 2.4560], "bbox": [2.30, 42.40, 2.60, 42.62], "bera": "CERDAGNE-CANIGOU"},
+    "Alpes — Mont-Blanc": {"center": [45.8600, 6.7400], "bbox": [6.60, 45.75, 7.15, 46.10], "bera": "MONT-BLANC"}
 }
 
 class AnalysisWorker(QThread):
@@ -49,8 +50,8 @@ class AnalysisWorker(QThread):
         bera = get_avalanche_risk(self.massif["bera"])
         raw_routes = search_routes(bbox, activity=self.activity)
 
-        athlete = WorkloadEngine.get_athlete_readiness()
-        readiness = athlete["readiness"]
+        athlete = DataManager.get_readiness()
+        readiness = athlete.get("readiness", 1.0)
 
         evaluated_routes = []
         for r in raw_routes:
@@ -70,38 +71,54 @@ class MainWindow(QMainWindow):
         self.worker = None
 
         self._setup_tabs()
-        self._load_initial_fast_state()
 
     def _setup_tabs(self):
         self.tab_widget = QTabWidget()
 
-        # 1. Onglet d'Accueil & Dashboard
         self.tab_home = HomeView()
         self.tab_widget.addTab(self.tab_home, "🏠 Accueil & Synthèse")
 
-        # 2. Onglet Entraînement
         self.tab_training = TrainingView()
         self.tab_widget.addTab(self.tab_training, "📈 Entraînement")
 
-        # 3. Onglet Conseiller & Profil
         self.tab_coach = HealthProfileView()
         self.tab_widget.addTab(self.tab_coach, "🎯 Conseiller & Profil")
 
-        # 4. Onglet Exploration Tactique
         self.tab_explore = QWidget()
         self._setup_explore_ui(self.tab_explore)
         self.tab_widget.addTab(self.tab_explore, "🧭 Exploration Tactique")
 
-        # Liaisons dynamiques entre onglets
+        self.tab_widget.currentChanged.connect(self.on_tab_changed)
         self.tab_training.activity_imported.connect(self.on_data_updated)
         self.tab_coach.profile_updated.connect(self.on_data_updated)
 
         self.setCentralWidget(self.tab_widget)
 
+    def on_tab_changed(self, index: int):
+        if index == 0:
+            if DataManager.is_tab_dirty(0):
+                self.tab_home.refresh_dashboard()
+                DataManager.mark_tab_clean(0)
+        elif index == 1:
+            self.tab_training.ensure_loaded()
+        elif index == 2:
+            self.tab_coach.ensure_loaded()
+        elif index == 3:
+            if not self.routes and (self.worker is None or not self.worker.isRunning()):
+                self.launch_analysis()
+
     def on_data_updated(self):
-        self.tab_home.refresh_dashboard()
-        self.tab_training.refresh_data()
-        self.tab_coach.refresh_coach_view()
+        DataManager.invalidate_cache()
+        curr = self.tab_widget.currentIndex()
+        if curr == 0:
+            self.tab_home.refresh_dashboard()
+            DataManager.mark_tab_clean(0)
+        elif curr == 1:
+            self.tab_training.refresh_data()
+            DataManager.mark_tab_clean(1)
+        elif curr == 2:
+            self.tab_coach.refresh_coach_view()
+            DataManager.mark_tab_clean(2)
 
     def _setup_explore_ui(self, parent_widget):
         main_layout = QVBoxLayout(parent_widget)
@@ -123,7 +140,7 @@ class MainWindow(QMainWindow):
         self.combo_activity.addItems(["Trail / Randonnée", "Ski de Randonnée"])
         left_layout.addWidget(self.combo_activity)
 
-        self.btn_scan = QPushButton("Actualiser le secteur")
+        self.btn_scan = QPushButton("Actualiser le secteur (C2C Direct)")
         self.btn_scan.clicked.connect(self.launch_analysis)
         left_layout.addWidget(self.btn_scan)
 
@@ -132,7 +149,7 @@ class MainWindow(QMainWindow):
         self.progress.setVisible(False)
         left_layout.addWidget(self.progress)
 
-        left_layout.addWidget(QLabel("<b>Itinéraires :</b>"))
+        left_layout.addWidget(QLabel("<b>Itinéraires Camptocamp :</b>"))
         self.list_routes = QListWidget()
         self.list_routes.currentRowChanged.connect(self.on_route_selected)
         left_layout.addWidget(self.list_routes)
@@ -147,12 +164,12 @@ class MainWindow(QMainWindow):
         self.browser.anchorClicked.connect(lambda url: QDesktopServices.openUrl(url))
         center_layout.addWidget(self.browser, stretch=2)
 
-        center_layout.addWidget(QLabel("<b>Profil Altimétrique :</b>"))
+        center_layout.addWidget(QLabel("<b>Profil Altimétrique & Segments Critiques :</b>"))
         self.elevation_chart = ElevationChart()
         center_layout.addWidget(self.elevation_chart, stretch=1)
 
         btn_box = QHBoxLayout()
-        self.btn_open_web = QPushButton("🌐 Fiche Web")
+        self.btn_open_web = QPushButton("🌐 Ouvrir sur Camptocamp")
         self.btn_open_web.setEnabled(False)
         self.btn_open_web.clicked.connect(self.open_current_web_page)
         btn_box.addWidget(self.btn_open_web)
@@ -169,31 +186,10 @@ class MainWindow(QMainWindow):
         splitter.addWidget(left_panel)
         splitter.addWidget(center_panel)
         splitter.addWidget(self.map_view)
-        splitter.setSizes([280, 460, 680])
+        splitter.setSizes([300, 480, 680])
 
         main_layout.addWidget(splitter)
-
-    def _load_initial_fast_state(self):
-        initial_routes = PYRENEES_MASTER_DATABASE["Gavarnie & Vignemale"]
-        eval_routes = []
-        for r in initial_routes:
-            r["eval"] = {
-                "score": 85,
-                "status": "Prêt",
-                "color": "#38A169",
-                "alerts": [],
-                "snow_pct": 5.0,
-                "slope_metrics": {"avg_slope_deg": 12, "max_slope_deg": 28, "has_critical_slopes": False}
-            }
-            eval_routes.append(r)
-
-        self.routes = eval_routes
-        for r in self.routes:
-            item = QListWidgetItem(f"{r['title']}\nIndice : 85/100 — Prêt")
-            self.list_routes.addItem(item)
-
-        if self.routes:
-            self.list_routes.setCurrentRow(0)
+        self.browser.setHtml("<h3 style='color:#A0AEC0;'>Sélectionnez un massif et cliquez sur 'Actualiser le secteur' pour interroger l'API Camptocamp en direct.</h3>")
 
     def launch_analysis(self):
         if self.worker is not None and self.worker.isRunning():
@@ -202,6 +198,7 @@ class MainWindow(QMainWindow):
         self.btn_scan.setEnabled(False)
         self.progress.setVisible(True)
         self.list_routes.clear()
+        self.browser.setHtml("<h3 style='color:#4FD1C5;'>Interrogation directe de l'API Camptocamp en cours...</h3>")
 
         massif_key = self.combo_massif.currentText()
         act_key = "trail" if self.combo_activity.currentIndex() == 0 else "skitouring"
@@ -217,14 +214,17 @@ class MainWindow(QMainWindow):
         self.list_routes.clear()
 
         if not routes:
-            self.browser.setHtml("<h3 style='color:#E53E3E;'>Aucun itinéraire trouvé sur ce secteur.</h3>")
+            self.browser.setHtml("<h3 style='color:#E53E3E;'>Aucun itinéraire trouvé sur Camptocamp pour ce secteur.</h3>")
             return
 
         for r in routes:
             ev = r.get("eval", {})
             score = ev.get("score", 70)
             status = ev.get("status", "Non évalué")
-            item = QListWidgetItem(f"{r['title']}\nIndice : {score}/100 — {status}")
+            track_tag = "🗺️ [TRACÉ GPS]" if r.get("has_track") else "📍 [TOPO SEUL]"
+            item = QListWidgetItem(f"{track_tag} {r['title']}\nIndice : {score}/100 — {status}")
+            if not r.get("has_track"):
+                item.setForeground(Qt.gray)
             self.list_routes.addItem(item)
 
         self.list_routes.setCurrentRow(0)
@@ -234,52 +234,93 @@ class MainWindow(QMainWindow):
             return
 
         self.active_index = index
-        self.btn_export.setEnabled(True)
+        r = self.routes[index]
+        has_track = r.get("has_track", False)
+
+        # Le bouton d'export GPX n'est actif que si une vraie trace existe
+        self.btn_export.setEnabled(has_track)
         self.btn_open_web.setEnabled(True)
 
-        r = self.routes[index]
         ev = r.get("eval", {})
         slope = ev.get("slope_metrics", {})
         coords = r.get("coords", [])
         elevations = r.get("elevations", [])
+        crit_segs = ev.get("critical_segments", [])
 
-        self.elevation_chart.plot_profile(coords, elevations, r["title"])
+        # Rendu du profil altimétrique
+        self.elevation_chart.plot_profile(
+            coords, elevations, r["title"],
+            critical_segments=crit_segs,
+            has_track=has_track
+        )
 
         d_plus = r.get("elevation_gain", 800)
-        dist_km = (len(coords) * 50.0) / 1000.0
+        dist_km = (len(coords) * 50.0) / 1000.0 if has_track else (d_plus / 100.0 * 0.7)
         sim = WorkloadEngine.simulate_route_impact(d_plus, dist_km)
+
+        # Bannière d'état de la trace
+        if has_track:
+            track_banner = """
+            <div style='background:#1D2B24; border-left:4px solid #38A169; padding:6px 12px; margin-bottom:8px; border-radius:4px;'>
+                <span style='color:#68D391; font-size:12px;'>🗺️ <b>Tracé GPS complet disponible</b> — Profil altimétrique et analyse de pente actifs.</span>
+            </div>
+            """
+        else:
+            track_banner = """
+            <div style='background:#3D321D; border-left:4px solid #ECC94B; padding:6px 12px; margin-bottom:8px; border-radius:4px;'>
+                <span style='color:#F6E05E; font-size:12px;'>📍 <b>Trace GPS non disponible sur C2C</b> — Fiche descriptive basée sur les données d'altitude. Export GPX désactivé.</span>
+            </div>
+            """
+
+        # Encart des tronçons critiques
+        if crit_segs:
+            crit_html_list = "".join([
+                f"<li style='color:#FF5252;'><b>Du km {s['start_km']} au km {s['end_km']} :</b> {s['reason']}</li>"
+                for s in crit_segs
+            ])
+            crit_section = f"""
+            <div style='background:#3A1D1D; border-left:4px solid #FF1744; padding:8px 12px; margin:8px 0; border-radius:4px;'>
+                <h4 style='margin:0 0 4px 0; color:#FF8A80;'>⚠️ Tronçons Délicats Détectés (Météo / Pente) :</h4>
+                <ul style='margin:0; padding-left:18px;'>{crit_html_list}</ul>
+            </div>
+            """
+        else:
+            crit_section = ""
 
         alerts_html = "".join([f"<li style='color:#F6AD55;'><b>{a}</b></li>" for a in ev.get("alerts", [])])
         if not alerts_html:
-            alerts_html = "<li style='color:#68D391;'>Aucun facteur critique de blocage.</li>"
+            alerts_html = "<li style='color:#68D391;'>Facteurs environnementaux favorables.</li>"
 
         source_url = r.get("source_url", "https://www.camptocamp.org")
 
         html = f"""
         <h2 style='color:#4FD1C5; margin-top:0;'>{r['title']}</h2>
-        <p><b>Difficulté :</b> {r['rating']} | <b>Source :</b> <a href="{source_url}" style="color:#63B3ED;">Consulter le topo</a></p>
+        <p><b>Cotation :</b> {r['rating']} | <b>Source :</b> <a href="{source_url}" style="color:#63B3ED;">Fiche Camptocamp</a></p>
         
+        {track_banner}
+
         <div style='background:{ev.get('color', '#38A169')}; padding:8px 12px; border-radius:5px; color:#FFFFFF; font-weight:bold;'>
-            Score de faisabilité personnalisé : {ev.get('score', 80)} / 100 ({ev.get('status', 'OK')})
+            Score de faisabilité : {ev.get('score', 80)} / 100 ({ev.get('status', 'OK')})
         </div>
 
-        <h3>Simulation Pré-Course (What-If) :</h3>
+        {crit_section}
+
+        <h3>Simulation de Charge (What-If) :</h3>
         <div style='background:#242933; border-left:4px solid {sim['advice_color']}; padding:10px; border-radius:4px;'>
-            <p style='margin:0;'><b>Durée estimée :</b> {sim['duration_str']} | <b>Charge projetée (TRIMP) :</b> +{sim['projected_trimp']}</p>
-            <p style='margin:4px 0 0 0;'><b>Évolution ACWR :</b> {sim['current_acwr']} ➔ <b>{sim['new_acwr']}</b> (Risque de blessure : {sim['new_risk']}%)</p>
+            <p style='margin:0;'><b>Durée estimée :</b> ~{sim['duration_str']} | <b>Charge (TRIMP) :</b> +{sim['projected_trimp']}</p>
+            <p style='margin:4px 0 0 0;'><b>Évolution ACWR :</b> {sim['current_acwr']} ➔ <b>{sim['new_acwr']}</b></p>
             <p style='margin:4px 0 0 0; color:{sim['advice_color']};'><b>Verdict :</b> {sim['advice']}</p>
         </div>
 
-        <h3>Dénivelé & Pentes :</h3>
+        <h3>Dénivelé & Altitude :</h3>
         <table style='width:100%; border-collapse:collapse; color:#E2E8F0;'>
             <tr><td>⬆️ <b>Dénivelé positif (D+) :</b></td><td>+{r.get('elevation_gain', 0)} m</td></tr>
             <tr><td>⬇️ <b>Dénivelé négatif (D-) :</b></td><td>-{r.get('elevation_loss', 0)} m</td></tr>
             <tr><td>🔺 <b>Altitude max :</b></td><td>{r.get('elevation_max', 0)} m</td></tr>
             <tr><td>🔻 <b>Altitude min :</b></td><td>{r.get('elevation_min', 0)} m</td></tr>
-            <tr><td>📐 <b>Pente moyenne :</b></td><td>{slope.get('avg_slope_deg', 0)}° (Max: {slope.get('max_slope_deg', 0)}°)</td></tr>
         </table>
 
-        <h3>Points d'attention (Terrain & Forme) :</h3>
+        <h3>Points d'attention :</h3>
         <ul>{alerts_html}</ul>
 
         <h3>Description :</h3>
@@ -289,6 +330,7 @@ class MainWindow(QMainWindow):
 
         center = MASSIFS[self.combo_massif.currentText()]["center"]
         self.map_view.render_routes_map(center, self.routes, active_route_id=r["id"])
+
 
     def open_current_web_page(self):
         if self.active_index >= 0:

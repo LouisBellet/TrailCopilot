@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 from PySide6.QtCore import Qt, Signal, QThread
 from PySide6.QtWidgets import (
@@ -8,22 +7,14 @@ from PySide6.QtWidgets import (
 )
 from core.fit_parser import parse_fit_file, calculate_banister_trimp
 from core.training_db import (
-    save_activity, get_all_activities, get_activity_details,
-    get_user_profile
+    save_activity, delete_activity, get_activity_details, get_user_profile
 )
-from core.workload_engine import WorkloadEngine
 from core.device_sync import scan_connected_watches
 from core.excel_importer import import_workouts_from_excel
+from core.data_manager import DataManager
 from ui.workload_chart import WorkloadGaugeChart
 from ui.workout_detail_dialog import WorkoutDetailDialog
-
-BORG_LABELS = {
-    6: "6 - Aucun effort", 7: "7 - Extrêmement léger", 8: "8",
-    9: "9 - Très léger", 10: "10", 11: "11 - Léger", 12: "12",
-    13: "13 - Un peu dur (Z2/Z3)", 14: "14", 15: "15 - Dur / Lourd (Z4)",
-    16: "16", 17: "17 - Très dur (Seuil)", 18: "18",
-    19: "19 - Extrêmement dur", 20: "20 - Maximal absolu"
-}
+from ui.edit_workout_dialog import EditWorkoutDialog
 
 class USBWatcherThread(QThread):
     watch_synced = Signal(str, int)
@@ -52,17 +43,16 @@ class TrainingView(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.is_loaded = False
         self.layout = QVBoxLayout(self)
         self.layout.setContentsMargins(10, 10, 10, 10)
         self._init_ui()
-        self.refresh_data()
 
         self.usb_thread = USBWatcherThread(self)
         self.usb_thread.watch_synced.connect(self.on_usb_synced)
         self.usb_thread.start()
 
     def _init_ui(self):
-        # Moitié supérieure : 3 graphiques scientifiques
         self.acwr_chart = WorkloadGaugeChart()
         self.layout.addWidget(self.acwr_chart, stretch=1)
 
@@ -85,21 +75,28 @@ class TrainingView(QWidget):
         btn_bar.addStretch()
         self.layout.addLayout(btn_bar)
 
-        # Moitié inférieure : tableau avec ligne de saisie directe Borg 6-20
         self.table = QTableWidget()
         self.table.setColumnCount(10)
         self.table.setHorizontalHeaderLabels([
-            "Date", "Sport", "Titre / Lieu", "Durée (min)", "Distance (km)", "D+ (m)", "D- (m)", "FC Moy", "Borg RPE (6-20)", "Action"
+            "Date", "Sport", "Titre / Lieu", "Durée (min)", "Distance (km)", "D+ (m)", "D- (m)", "FC Moy", "Borg RPE", "Actions"
         ])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
         self.table.horizontalHeader().setStretchLastSection(True)
         self.table.verticalHeader().setVisible(False)
+        self.table.cellDoubleClicked.connect(self._on_table_double_clicked)
         self.layout.addWidget(self.table, stretch=1)
+
+    def ensure_loaded(self):
+        if not self.is_loaded or DataManager.is_tab_dirty(1):
+            self.refresh_data()
+            self.is_loaded = True
+            DataManager.mark_tab_clean(1)
 
     def trigger_manual_usb_scan(self):
         res = scan_connected_watches()
         if res["brand"]:
             if res["imported"] > 0:
+                DataManager.invalidate_cache()
                 QMessageBox.information(self, "USB Détecté", f"Montre <b>{res['brand']}</b> synchronisée : {res['imported']} sortie(s) importée(s).")
                 self.refresh_data()
                 self.activity_imported.emit()
@@ -110,6 +107,7 @@ class TrainingView(QWidget):
 
     def on_usb_synced(self, brand: str, count: int):
         self.lbl_usb_status.setText(f"<span style='color:#38A169;'>Synchro auto : {brand} (+{count})</span>")
+        DataManager.invalidate_cache()
         self.refresh_data()
         self.activity_imported.emit()
 
@@ -117,6 +115,7 @@ class TrainingView(QWidget):
         file_paths, _ = QFileDialog.getOpenFileNames(self, "Sélectionner des fichiers FIT", "", "FIT Files (*.fit *.FIT)")
         if file_paths:
             imported = sum(1 for p in file_paths if save_activity(parse_fit_file(p)))
+            DataManager.invalidate_cache()
             self.refresh_data()
             self.activity_imported.emit()
             QMessageBox.information(self, "Importation", f"{imported} fichier(s) FIT importé(s) avec succès.")
@@ -126,48 +125,71 @@ class TrainingView(QWidget):
         if file_path:
             res = import_workouts_from_excel(file_path)
             if not res.get("error"):
+                DataManager.invalidate_cache()
                 QMessageBox.information(self, "Import Excel", f"{res['imported']} sortie(s) importée(s).")
                 self.refresh_data()
                 self.activity_imported.emit()
 
     def refresh_data(self):
-        readiness = WorkloadEngine.get_athlete_readiness()
+        readiness = DataManager.get_readiness()
         self.acwr_chart.plot_all_indicators(readiness)
 
-        activities = get_all_activities()
+        activities = DataManager.get_activities()
         self.table.setRowCount(len(activities) + 1)
         self._setup_input_row()
 
         for idx, a in enumerate(activities, start=1):
             self.table.setCellWidget(idx, 0, None)
-            self.table.setItem(idx, 0, QTableWidgetItem(str(a["start_time"][:10])))
-            self.table.setItem(idx, 1, QTableWidgetItem(str(a["sport"])))
-            self.table.setItem(idx, 2, QTableWidgetItem(str(a["name"])))
-            self.table.setItem(idx, 3, QTableWidgetItem(f"{a['duration_min']} min"))
-            self.table.setItem(idx, 4, QTableWidgetItem(f"{a['distance_km']} km"))
-            self.table.setItem(idx, 5, QTableWidgetItem(f"+{int(a['d_plus'])} m"))
-            self.table.setItem(idx, 6, QTableWidgetItem(f"-{int(a['d_minus'])} m"))
-            self.table.setItem(idx, 7, QTableWidgetItem(f"{a['avg_hr']} bpm" if a['avg_hr'] else "-"))
-            
-            raw_trimp = a.get("trimp", 0)
-            self.table.setItem(idx, 8, QTableWidgetItem(f"TRIMP {raw_trimp}"))
+            it_date = QTableWidgetItem(str(a["start_time"][:10]))
+            it_sport = QTableWidgetItem(str(a["sport"]))
+            it_name = QTableWidgetItem(str(a["name"]))
+            it_dur = QTableWidgetItem(f"{a['duration_min']} min")
+            it_dist = QTableWidgetItem(f"{a['distance_km']} km")
+            it_dp = QTableWidgetItem(f"+{int(a['d_plus'])} m")
+            it_dm = QTableWidgetItem(f"-{int(a['d_minus'])} m")
+            it_hr = QTableWidgetItem(f"{a['avg_hr']} bpm" if a['avg_hr'] else "-")
+            it_borg = QTableWidgetItem(f"{a.get('rpe', 13)} / 20 (T:{int(a['trimp'])})")
 
-            btn_det = QPushButton("🔍 Détails")
-            btn_det.setStyleSheet("background-color: #2D3748; padding: 4px 8px; font-size: 11px;")
+            for col_i, item in enumerate((it_date, it_sport, it_name, it_dur, it_dist, it_dp, it_dm, it_hr, it_borg)):
+                item.setFlags(Qt.ItemIsEnabled | Qt.ItemIsSelectable)
+                self.table.setItem(idx, col_i, item)
+
             act_id = a["id"]
-            btn_det.clicked.connect(lambda _, aid=act_id: self.open_activity_details(aid))
-            self.table.setCellWidget(idx, 9, btn_det)
+            action_widget = QWidget()
+            h_action = QHBoxLayout(action_widget)
+            h_action.setContentsMargins(2, 2, 2, 2)
+            h_action.setSpacing(4)
 
-        self.table.setColumnWidth(0, 105)
-        self.table.setColumnWidth(1, 100)
-        self.table.setColumnWidth(2, 220)
+            btn_edit = QPushButton("✏️")
+            btn_edit.setToolTip("Modifier cette séance")
+            btn_edit.setStyleSheet("background-color: #3182CE; padding: 3px 6px; font-weight: bold;")
+            btn_edit.clicked.connect(lambda _, aid=act_id: self.open_edit_dialog(aid))
+            h_action.addWidget(btn_edit)
+
+            btn_det = QPushButton("🔍")
+            btn_det.setToolTip("Voir le profil & statistiques")
+            btn_det.setStyleSheet("background-color: #2D3748; padding: 3px 6px;")
+            btn_det.clicked.connect(lambda _, aid=act_id: self.open_activity_details(aid))
+            h_action.addWidget(btn_det)
+
+            btn_del = QPushButton("🗑️")
+            btn_del.setToolTip("Supprimer cette séance")
+            btn_del.setStyleSheet("background-color: #E53E3E; padding: 3px 6px;")
+            btn_del.clicked.connect(lambda _, aid=act_id, name=a['name']: self.quick_delete_activity(aid, name))
+            h_action.addWidget(btn_del)
+
+            self.table.setCellWidget(idx, 9, action_widget)
+
+        self.table.setColumnWidth(0, 100)
+        self.table.setColumnWidth(1, 95)
+        self.table.setColumnWidth(2, 210)
         self.table.setColumnWidth(3, 85)
-        self.table.setColumnWidth(4, 95)
+        self.table.setColumnWidth(4, 90)
         self.table.setColumnWidth(5, 75)
         self.table.setColumnWidth(6, 75)
         self.table.setColumnWidth(7, 85)
-        self.table.setColumnWidth(8, 110)
-        self.table.setColumnWidth(9, 90)
+        self.table.setColumnWidth(8, 120)
+        self.table.setColumnWidth(9, 110)
 
     def _setup_input_row(self):
         self.in_date = QDateEdit()
@@ -209,7 +231,6 @@ class TrainingView(QWidget):
         self.in_hr.setSpecialValueText("-")
         self.table.setCellWidget(0, 7, self.in_hr)
 
-        # Échelle de Borg (6 à 20)
         self.in_borg = QSpinBox()
         self.in_borg.setRange(6, 20)
         self.in_borg.setValue(13)
@@ -249,14 +270,43 @@ class TrainingView(QWidget):
             "filename": synth_filename, "name": title, "sport": sport,
             "start_time": date_str, "distance_km": dist, "d_plus": dp, "d_minus": dm,
             "duration_min": dur, "avg_hr": hr or (borg * 10),
-            "max_hr": (hr or (borg * 10)) + 15, "trimp": trimp, "records": []
+            "max_hr": (hr or (borg * 10)) + 15, "trimp": trimp, "rpe": borg, "records": []
         }
 
         if save_activity(act_data):
             self.in_title.clear()
+            DataManager.invalidate_cache()
             self.refresh_data()
             self.activity_imported.emit()
             QMessageBox.information(self, "Séance Ajoutée", f"Activité enregistrée avec une charge TRIMP de {trimp} (Borg {borg}).")
+
+    def _on_table_double_clicked(self, row: int, column: int):
+        if row > 0:
+            activities = DataManager.get_activities()
+            if 0 <= row - 1 < len(activities):
+                act_id = activities[row - 1]["id"]
+                self.open_edit_dialog(act_id)
+
+    def open_edit_dialog(self, activity_id: int):
+        data = get_activity_details(activity_id)
+        if data:
+            dlg = EditWorkoutDialog(data, self)
+            if dlg.exec():
+                DataManager.invalidate_cache()
+                self.refresh_data()
+                self.activity_imported.emit()
+
+    def quick_delete_activity(self, activity_id: int, act_name: str):
+        rep = QMessageBox.question(
+            self, "Confirmer la suppression",
+            f"Supprimer définitivement la séance <b>{act_name}</b> ?<br>Les charges et graphiques seront immédiatement recalculés.",
+            QMessageBox.Yes | QMessageBox.No
+        )
+        if rep == QMessageBox.Yes:
+            if delete_activity(activity_id):
+                DataManager.invalidate_cache()
+                self.refresh_data()
+                self.activity_imported.emit()
 
     def open_activity_details(self, activity_id: int):
         data = get_activity_details(activity_id)

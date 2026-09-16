@@ -1,229 +1,151 @@
-import math
 import json
+import math
 import requests
 
-# Cache mémoire pour éviter de recalculer les mêmes tracés
-_ROUTING_CACHE = {}
+C2C_API_URL = "https://api.camptocamp.org/routes"
 
-def normalize_lat_lon(pt: list) -> list:
-    c1, c2 = float(pt[0]), float(pt[1])
-    if -6.0 <= c1 <= 10.0 and 41.0 <= c2 <= 51.0:
-        return [c2, c1]
-    return [c1, c2]
+def wgs84_to_epsg3857(lon: float, lat: float):
+    x = lon * 20037508.34 / 180.0
+    y = math.log(math.tan((90.0 + lat) * math.pi / 360.0)) / (math.pi / 180.0)
+    y = y * 20037508.34 / 180.0
+    return int(x), int(y)
 
-def fetch_brouter_trail(start_lat: float, start_lon: float, end_lat: float, end_lon: float) -> tuple:
-    """
-    Interroge BRouter pour obtenir le tracé exact sur sentiers OSM.
-    Bascule automatiquement sur un serveur miroir en cas de saturation/timeout.
-    """
-    cache_key = f"{round(start_lat, 4)},{round(start_lon, 4)}_{round(end_lat, 4)},{round(end_lon, 4)}"
-    if cache_key in _ROUTING_CACHE:
-        return _ROUTING_CACHE[cache_key]
+def epsg3857_to_wgs84(x: float, y: float):
+    lon = (x / 20037508.34) * 180.0
+    lat = (y / 20037508.34) * 180.0
+    lat = 180.0 / math.pi * (2.0 * math.atan(math.exp(lat * math.pi / 180.0)) - math.pi / 2.0)
+    return round(lat, 5), round(lon, 5)
 
-    # Serveur principal + miroir européen de secours
-    servers = [
-        "https://brouter.de/brouter",
-        "https://brouter.m11n.de/brouter"
-    ]
-
-    params = {
-        "lonlats": f"{start_lon:.5f},{start_lat:.5f}|{end_lon:.5f},{end_lat:.5f}",
-        "profile": "hiking-mountain",
-        "format": "geojson"
-    }
-
-    headers = {"User-Agent": "MountainScoutApp/1.0"}
-
-    for server in servers:
-        try:
-            # 4 secondes max pour se connecter, 12 secondes pour calculer le trajet
-            resp = requests.get(server, params=params, headers=headers, timeout=(4, 12))
-            if resp.status_code == 200:
-                data = resp.json()
-                features = data.get("features", [])
-                if features:
-                    raw_coords = features[0].get("geometry", {}).get("coordinates", [])
-                    coords = [[round(pt[1], 5), round(pt[0], 5)] for pt in raw_coords]
-                    elevations = [round(pt[2], 1) if len(pt) >= 3 else 0.0 for pt in raw_coords]
-                    
-                    if len(coords) >= 15:
-                        _ROUTING_CACHE[cache_key] = (coords, elevations)
-                        return coords, elevations
-        except requests.exceptions.RequestException:
-            # Si le premier serveur timeout, tente le second sans bloquer
-            continue
-
-    return None, None
-
-def search_osm_trails(bbox: list, limit: int = 4) -> list:
-    """Récupère les sentiers de randonnée réels depuis OpenStreetMap via Overpass API."""
-    min_lon, min_lat, max_lon, max_lat = bbox
-    query = f"""
-    [out:json][timeout:8];
-    (
-      relation["route"="hiking"]({min_lat},{min_lon},{max_lat},{max_lon});
-      way["highway"="path"]["sac_scale"]({min_lat},{min_lon},{max_lat},{max_lon});
-    );
-    out tags geom {limit};
-    """
-    routes = []
-    try:
-        resp = requests.post("https://overpass-api.de/api/interpreter", data={'data': query}, timeout=8)
-        if resp.status_code == 200:
-            for el in resp.json().get("elements", []):
-                name = el.get("tags", {}).get("name")
-                if not name:
-                    continue
-
-                coords = []
-                if "members" in el:
-                    for m in el.get("members", []):
-                        for pt in m.get("geometry", []):
-                            coords.append([round(pt["lat"], 5), round(pt["lon"], 5)])
-                            if len(coords) >= 90:
-                                break
-                        if len(coords) >= 90:
-                            break
-                elif "geometry" in el:
-                    coords = [[round(pt["lat"], 5), round(pt["lon"], 5)] for pt in el.get("geometry", [])]
-
-                if len(coords) >= 15:
-                    elevations = [int(1500 + i * 8) for i in range(len(coords))]
-                    routes.append({
-                        "id": el.get("id"),
-                        "title": name,
-                        "elevation_gain": 850,
-                        "elevation_loss": 850,
-                        "elevation_min": elevations[0],
-                        "elevation_max": elevations[-1],
-                        "rating": el.get("tags", {}).get("sac_scale", "T2 (Sentier montagnard)"),
-                        "source_url": f"https://www.openstreetmap.org/{el.get('type', 'relation')}/{el.get('id')}",
-                        "coords": coords,
-                        "elevations": elevations,
-                        "summary": f"Sentier officiel identifié sur OpenStreetMap. Balisage : {el.get('tags', {}).get('symbol', 'Standard')}."
-                    })
-    except Exception:
-        pass
-    return routes
-
-# Topos détaillés par secteur pyrénéen avec tracés denses
-PYRENEES_MASTER_DATABASE = {
-    "Gavarnie & Vignemale": [
-        {
-            "id": 89412,
-            "title": "Pic du Taillon (3 144 m) par la Brèche de Roland",
-            "elevation_gain": 936, "elevation_loss": 936, "elevation_min": 2208, "elevation_max": 3144,
-            "rating": "T3 (Haute Montagne)",
-            "source_url": "https://www.camptocamp.org/routes/89412/fr/pic-du-taillon-depuis-le-col-des-tentes",
-            "coords": [[round(42.7130 - i * 0.00031 + math.sin(i / 4.0) * 0.0012, 5), round(-0.0480 - i * 0.00008 + math.cos(i / 3.0) * 0.001, 5)] for i in range(85)],
-            "elevations": [int(2208 + (3144 - 2208) * (1 / (1 + math.exp(-0.08 * (i - 40))))) for i in range(85)],
-            "summary": "Le grand 3000 accessible de Gavarnie. Passage sous le glacier du Taillon, le refuge des Sarradets et l'entaille de la Brèche de Roland."
-        },
-        {
-            "id": 89413,
-            "title": "Refuge des Espuguettes & Cirque d'Estaubé",
-            "elevation_gain": 780, "elevation_loss": 780, "elevation_min": 1370, "elevation_max": 2027,
-            "rating": "T2 (Randonnée moyenne)",
-            "source_url": "https://www.camptocamp.org/routes/49821/fr/refuge-des-espuguettes",
-            "coords": [[round(42.7350 + i * 0.00028, 5), round(-0.0120 + i * 0.00035 + math.sin(i / 5.0) * 0.0015, 5)] for i in range(75)],
-            "elevations": [int(1370 + (2027 - 1370) * (i / 74)) for i in range(75)],
-            "summary": "Balcon dominant le Cirque de Gavarnie et la Brèche. Sentier herbeux puis schisteux sans difficulté technique majeure."
-        }
-    ],
-    "Néouvielle & Lacs": [
-        {
-            "id": 92140,
-            "title": "Tour des Lacs du Néouvielle (Aubert, Aumar, Madame)",
-            "elevation_gain": 650, "elevation_loss": 650, "elevation_min": 2080, "elevation_max": 2500,
-            "rating": "T2 (Sentier granitique)",
-            "source_url": "https://www.camptocamp.org/routes/138240/fr/reserve-naturelle-du-neouvielle-tour-des-lacs",
-            "coords": [[round(42.8410 + math.sin(i / 10.0) * 0.012, 5), round(0.1420 + math.cos(i / 10.0) * 0.015, 5)] for i in range(80)],
-            "elevations": [int(2080 + 280 * math.sin(i / 12.0) + (i * 2.2)) for i in range(80)],
-            "summary": "Circuit au cœur de la Réserve Naturelle du Néouvielle. Dalles de granit clair, laquets turquoise et pins à crochets."
-        }
-    ],
-    "Vallée d'Ossau & Ayous": [
-        {
-            "id": 51230,
-            "title": "Le Tour du Pic du Midi d'Ossau par Peyreget",
-            "elevation_gain": 1050, "elevation_loss": 1050, "elevation_min": 1550, "elevation_max": 2315,
-            "rating": "T3 (Sentier montagnard)",
-            "source_url": "https://www.camptocamp.org/routes/51230/fr/pic-du-midi-d-ossau-tour-du-pic",
-            "coords": [[round(42.8420 - i * 0.00022 + math.sin(i / 5.0) * 0.0018, 5), round(-0.4350 + i * 0.00025 + math.cos(i / 4.0) * 0.0015, 5)] for i in range(80)],
-            "elevations": [int(1550 + (2315 - 1550) * math.sin(i / 25.0)) for i in range(80)],
-            "summary": "Le classique du Béarn. Contournement complet des murailles de porphyre par le Col de Suzon, Pombie et Peyreget."
-        },
-        {
-            "id": 51231,
-            "title": "Tour des Lacs d'Ayous face à l'Ossau",
-            "elevation_gain": 600, "elevation_loss": 600, "elevation_min": 1420, "elevation_max": 2000,
-            "rating": "T1 / T2 (Facile)",
-            "source_url": "https://www.camptocamp.org/routes/128450/fr/lacs-d-ayous-boucle",
-            "coords": [[round(42.8620 + i * 0.00018 + math.sin(i / 6.0) * 0.002, 5), round(-0.4650 - i * 0.00022, 5)] for i in range(70)],
-            "elevations": [int(1420 + (2000 - 1420) * (i / 69)) for i in range(70)],
-            "summary": "Classique estivale incontournable. Le reflet de l'Ossau dans le lac Gentau offre un panorama spectaculaire."
-        }
-    ],
-    "Luchonnais & Vénasque": [
-        {
-            "id": 74510,
-            "title": "Port de Vénasque et Boucle de Sauvegarde",
-            "elevation_gain": 1150, "elevation_loss": 1150, "elevation_min": 1395, "elevation_max": 2444,
-            "rating": "T3 (Passage frontière)",
-            "source_url": "https://www.camptocamp.org/routes/48900/fr/port-de-venasque-depuis-l-hospice-de-france",
-            "coords": [[round(42.7210 - i * 0.00035 + math.sin(i / 4.0) * 0.0015, 5), round(0.5850 - i * 0.00018, 5)] for i in range(85)],
-            "elevations": [int(1395 + (2444 - 1395) * (i / 84)) for i in range(85)],
-            "summary": "Montée par les lacets des Boums jusqu'à la brèche frontière ouvrant la vue sur l'Aneto et la Maladeta."
-        }
-    ],
-    "Carlit & Bouillouses": [
-        {
-            "id": 62100,
-            "title": "Pic Carlit (2 921 m) et boucle des 12 Lacs",
-            "elevation_gain": 910, "elevation_loss": 910, "elevation_min": 2017, "elevation_max": 2921,
-            "rating": "T3 (Cheminée finale)",
-            "source_url": "https://www.camptocamp.org/routes/45230/fr/pic-carlit-voie-normale",
-            "coords": [[round(42.5700 + i * 0.00022 + math.sin(i / 5.0) * 0.0016, 5), round(1.9900 - i * 0.00030, 5)] for i in range(80)],
-            "elevations": [int(2017 + (2921 - 2017) * (i / 79)) for i in range(80)],
-            "summary": "Toit des Pyrénées-Orientales. Dédale de lacs glaciaires avant une montée rocheuse finale."
-        }
-    ],
-    "Massif du Canigou": [
-        {
-            "id": 63200,
-            "title": "Pic du Canigou (2 784 m) par les Cortalets",
-            "elevation_gain": 650, "elevation_loss": 650, "elevation_min": 2150, "elevation_max": 2784,
-            "rating": "T2 (Arête facile)",
-            "source_url": "https://www.camptocamp.org/routes/49300/fr/pic-du-canigou-voie-normale",
-            "coords": [[round(42.5180 - i * 0.00028, 5), round(2.4560 - i * 0.00015 + math.sin(i / 4.0) * 0.001, 5)] for i in range(75)],
-            "elevations": [int(2150 + (2784 - 2150) * (i / 74)) for i in range(75)],
-            "summary": "Ascension de la montagne sacrée des Catalans avec vue plongeante sur la Méditerranée."
-        }
-    ]
-}
+def normalize_point(pt: list) -> list:
+    x, y = pt[0], pt[1]
+    if -180.0 <= x <= 180.0 and -90.0 <= y <= 90.0:
+        return [round(y, 5), round(x, 5)]
+    lat, lon = epsg3857_to_wgs84(x, y)
+    return [lat, lon]
 
 def search_routes(bbox: list, activity: str = "trail") -> list:
-    """Combine OpenStreetMap, routage BRouter avec miroir et base pyrénéenne certifiée."""
-    routes = []
-    
-    # 1. Extraction des sentiers balisés OpenStreetMap
-    osm_results = search_osm_trails(bbox, limit=3)
-    if osm_results:
-        routes.extend(osm_results)
-
-    # 2. Rapprochement avec les topos détaillés du secteur
     min_lon, min_lat, max_lon, max_lat = bbox
-    c_lat = (min_lat + max_lat) / 2
-    c_lon = (min_lon + max_lon) / 2
 
-    for sector_name, sector_routes in PYRENEES_MASTER_DATABASE.items():
-        sample_pt = sector_routes[0]["coords"][0]
-        if abs(sample_pt[0] - c_lat) < 0.25 and abs(sample_pt[1] - c_lon) < 0.25:
-            routes.extend(sector_routes)
-            break
+    min_x, min_y = wgs84_to_epsg3857(min_lon, min_lat)
+    max_x, max_y = wgs84_to_epsg3857(max_lon, max_lat)
 
-    # 3. Fallback de sécurité : Gavarnie si aucune coordonnée ne correspond
-    if not routes:
-        routes = PYRENEES_MASTER_DATABASE["Gavarnie & Vignemale"]
+    act_param = (
+        "hiking,mountain_climbing,snow_ice_mixed,snowshoeing"
+        if activity == "trail"
+        else "skitouring,snow_ice_mixed,mountain_climbing"
+    )
 
+    params = {
+        "bbox": f"{min_x},{min_y},{max_x},{max_y}",
+        "act": act_param,
+        "limit": 100
+    }
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) MountainScout/3.0",
+        "Accept": "application/json"
+    }
+
+    routes = []
+    try:
+        resp = requests.get(C2C_API_URL, params=params, headers=headers, timeout=(4.0, 15.0))
+        if resp.status_code != 200:
+            return []
+
+        documents = resp.json().get("documents", [])
+
+        for doc in documents:
+            doc_id = doc.get("document_id")
+
+            locales = doc.get("locales", [])
+            loc = next((l for l in locales if l.get("lang") == "fr"), locales[0] if locales else {})
+            title = loc.get("title", f"Itinéraire Camptocamp #{doc_id}")
+
+            gain = doc.get("elevation_up")
+            loss = doc.get("elevation_down")
+            max_alt = doc.get("elevation_max")
+            min_alt = doc.get("elevation_min")
+
+            if max_alt is None and min_alt is None:
+                max_alt = 2600
+                min_alt = 1600
+            elif max_alt is None:
+                max_alt = min_alt + (gain or 800)
+            elif min_alt is None:
+                min_alt = max(400, max_alt - (gain or 800))
+
+            if gain is None:
+                gain = max(100, max_alt - min_alt)
+            if loss is None:
+                loss = gain
+
+            raw_geom = doc.get("geometry", {}).get("geom")
+            geom = json.loads(raw_geom) if isinstance(raw_geom, str) else raw_geom
+
+            coords = []
+            elevations = []
+            point_marker = None
+            has_track = False
+
+            if geom and isinstance(geom, dict):
+                g_type = geom.get("type")
+                g_coords = geom.get("coordinates", [])
+
+                if g_type == "LineString" and len(g_coords) >= 2:
+                    coords = [normalize_point(pt) for pt in g_coords]
+                    has_track = True
+                    if len(g_coords[0]) > 2 and g_coords[0][2] is not None:
+                        elevations = [round(float(pt[2]), 1) for pt in g_coords]
+
+                elif g_type == "MultiLineString" and g_coords:
+                    for line in g_coords:
+                        if len(line) >= 2:
+                            coords.extend([normalize_point(pt) for pt in line])
+                    if len(coords) >= 2:
+                        has_track = True
+
+                elif g_type == "Point" and len(g_coords) >= 2:
+                    point_marker = normalize_point(g_coords)
+
+            if has_track and (not elevations or len(elevations) != len(coords)):
+                elevations = [
+                    round(min_alt + (max_alt - min_alt) * (i / max(1, len(coords) - 1)), 1)
+                    for i in range(len(coords))
+                ]
+
+            if not point_marker and coords:
+                point_marker = coords[0]
+
+            rating = (
+                doc.get("hiking_rating")
+                or doc.get("global_rating")
+                or doc.get("ski_rating")
+                or "Non coté"
+            )
+
+            summary = loc.get("summary") or loc.get("description") or "Itinéraire extrait de Camptocamp."
+            if len(summary) > 400:
+                summary = summary[:400] + "..."
+
+            routes.append({
+                "id": doc_id,
+                "title": title,
+                "rating": rating,
+                "elevation_gain": int(gain),
+                "elevation_loss": int(loss),
+                "elevation_max": int(max_alt),
+                "elevation_min": int(min_alt),
+                "source_url": f"https://www.camptocamp.org/routes/{doc_id}",
+                "summary": summary,
+                "has_track": has_track,
+                "coords": coords,
+                "elevations": elevations,
+                "point_marker": point_marker
+            })
+
+    except Exception:
+        return []
+
+    # Tri : les itinéraires possédant une vraie trace GPS arrivent en premier
+    routes.sort(key=lambda r: (not r["has_track"], -r.get("elevation_gain", 0)))
     return routes

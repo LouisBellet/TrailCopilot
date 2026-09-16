@@ -1,6 +1,6 @@
 import math
 from datetime import datetime, timedelta
-from core.training_db import get_all_activities, get_user_profile
+from core.training_db import get_user_profile
 
 def parse_date_safe(date_str: str) -> datetime:
     clean = str(date_str).replace("T", " ").split(".")[0].strip()
@@ -13,57 +13,67 @@ def parse_date_safe(date_str: str) -> datetime:
 
 class WorkloadEngine:
     @staticmethod
-    def calculate_blanch_gabbett_risk(acwr: float) -> float:
-        risk = 9.98 * (acwr ** 2) - 18.42 * acwr + 11.73
-        return max(1.0, min(99.0, round(risk, 1)))
-
-    @staticmethod
-    def normalize_borg_rpe(val: float) -> int:
-        if val <= 10.0:
-            return max(6, min(20, int(round(6.0 + val * 1.4))))
-        return max(6, min(20, int(round(val))))
-
-    @staticmethod
-    def get_athlete_readiness() -> dict:
-        activities = get_all_activities()
+    def compute_readiness(activities: list) -> dict:
         today = datetime.now().date()
 
+        # 1. Dictionnaire des charges réelles par jour
+        daily_map = {}
+        for a in activities:
+            d = parse_date_safe(a["start_time"]).date()
+            daily_map[d] = daily_map.get(d, 0.0) + float(a.get("trimp", 0.0))
+
+        # 2. Facteurs de décroissance EWMA (Murray & Williams, 2017)
+        lambda_a = 2.0 / (7.0 + 1.0)   # 0.25 (Fatigue aiguë)
+        lambda_c = 2.0 / (28.0 + 1.0)  # ~0.069 (Fitness chronique)
+
+        # Calcul chronologique sur 60 jours pour stabiliser les moyennes exponentielles
+        start_date = today - timedelta(days=60)
+        curr_date = start_date
+        ewma_a = 0.0
+        ewma_c = 0.0
+        history = {}
+
+        while curr_date <= today:
+            load = daily_map.get(curr_date, 0.0)
+            ewma_a = load * lambda_a + (1.0 - lambda_a) * ewma_a
+            ewma_c = load * lambda_c + (1.0 - lambda_c) * ewma_c
+
+            # Mise à l'échelle hebdomadaire équivalente (x 7)
+            acute_val = round(ewma_a * 7.0, 1)
+            chronic_val = round(ewma_c * 7.0, 1)
+
+            if chronic_val < 3.0:
+                acwr = 0.0 if acute_val < 3.0 else min(2.5, round(acute_val / 8.0, 2))
+            else:
+                acwr = round(acute_val / chronic_val, 2)
+
+            history[curr_date] = {
+                "load": load,
+                "acute": acute_val,
+                "chronic": chronic_val,
+                "acwr": acwr,
+                "raw_ewma_a": ewma_a,
+                "raw_ewma_c": ewma_c
+            }
+            curr_date += timedelta(days=1)
+
+        # 3. Extraction des 28 derniers jours pour l'affichage
         timeline_days = []
         timeline_acwr = []
         timeline_acute = []
         timeline_chronic = []
         timeline_daily_load = []
-        timeline_risk = []
 
-        # 28 jours calendaires glissants jusqu'à AUJOURD'HUI
         for offset in range(27, -1, -1):
             day_target = today - timedelta(days=offset)
+            h = history.get(day_target, {"load": 0.0, "acute": 0.0, "chronic": 0.0, "acwr": 0.0})
             timeline_days.append(day_target.strftime("%d/%m"))
+            timeline_acwr.append(h["acwr"])
+            timeline_acute.append(h["acute"])
+            timeline_chronic.append(h["chronic"])
+            timeline_daily_load.append(h["load"])
 
-            acute_val = sum(
-                float(a.get("trimp", 0)) for a in activities 
-                if 0 <= (day_target - parse_date_safe(a["start_time"]).date()).days <= 6
-            )
-            chronic_val = sum(
-                float(a.get("trimp", 0)) for a in activities 
-                if 0 <= (day_target - parse_date_safe(a["start_time"]).date()).days <= 27
-            ) / 4.0
-
-            daily_load = sum(
-                float(a.get("trimp", 0)) for a in activities 
-                if (day_target - parse_date_safe(a["start_time"]).date()).days == 0
-            )
-
-            acwr = round(acute_val / chronic_val, 2) if chronic_val > 10.0 else 1.0
-            risk = WorkloadEngine.calculate_blanch_gabbett_risk(acwr)
-
-            timeline_acute.append(round(acute_val, 1))
-            timeline_chronic.append(round(chronic_val, 1))
-            timeline_acwr.append(acwr)
-            timeline_daily_load.append(round(daily_load, 1))
-            timeline_risk.append(risk)
-
-        # 14 derniers jours pour l'accueil
+        # 4. Historique des 14 derniers jours pour l'accueil
         recent_days_labels = []
         recent_distances = []
         recent_durations = []
@@ -81,18 +91,21 @@ class WorkloadEngine:
             recent_distances.append(round(d_sum, 1))
             recent_durations.append(round(t_sum, 1))
 
-        current_acwr = timeline_acwr[-1] if timeline_acwr else 1.0
+        current_acwr = timeline_acwr[-1] if timeline_acwr else 0.0
         current_acute = timeline_acute[-1] if timeline_acute else 0.0
         current_chronic = timeline_chronic[-1] if timeline_chronic else 0.0
-        current_risk = WorkloadEngine.calculate_blanch_gabbett_risk(current_acwr)
 
-        if current_acwr < 0.80:
+        if current_acwr == 0.0:
+            readiness = 0.90
+            status = "Sous-charge totale (Désentraînement / Inactif)"
+            color = "#3182CE"
+        elif current_acwr < 0.80:
             readiness = 0.95
             status = "Sous-charge relative (Capacité disponible pour s'entraîner)"
             color = "#3182CE"
         elif 0.80 <= current_acwr <= 1.30:
             readiness = 1.0
-            status = "Sweet Spot (Condition optimale & Risque faible)"
+            status = "Sweet Spot (Progression optimale & Risque faible)"
             color = "#38A169"
         elif 1.30 < current_acwr <= 1.50:
             readiness = 0.82
@@ -100,14 +113,15 @@ class WorkloadEngine:
             color = "#DD6B20"
         else:
             readiness = 0.65
-            status = "Zone de danger (Spike critique d'après Blanch & Gabbett)"
+            status = "Zone de danger (Pic critique de fatigue)"
             color = "#E53E3E"
+
+        tomorrow_label = (today + timedelta(days=1)).strftime("%d/%m")
 
         return {
             "acute_load": current_acute,
             "chronic_load": current_chronic,
             "acwr": current_acwr,
-            "injury_risk_pct": current_risk,
             "readiness": readiness,
             "status": status,
             "color": color,
@@ -116,10 +130,13 @@ class WorkloadEngine:
             "timeline_acute": timeline_acute,
             "timeline_chronic": timeline_chronic,
             "timeline_daily_load": timeline_daily_load,
-            "timeline_risk": timeline_risk,
             "recent_distances": recent_distances,
             "recent_durations": recent_durations,
-            "recent_days_labels": recent_days_labels
+            "recent_days_labels": recent_days_labels,
+            "tomorrow_label": tomorrow_label,
+            "projections": [],
+            "today_ewma_a": history[today]["raw_ewma_a"],
+            "today_ewma_c": history[today]["raw_ewma_c"]
         }
 
     @staticmethod
@@ -137,19 +154,25 @@ class WorkloadEngine:
         delta_hr = (est_hr - hr_rest) / max(1, (hr_max - hr_rest))
         projected_trimp = round(est_duration_min * delta_hr * 0.64 * math.exp(1.92 * delta_hr), 1)
 
-        readiness_data = WorkloadEngine.get_athlete_readiness()
-        new_acute = readiness_data["acute_load"] + projected_trimp
-        new_acwr = round(new_acute / max(10.0, readiness_data["chronic_load"]), 2)
-        new_risk = WorkloadEngine.calculate_blanch_gabbett_risk(new_acwr)
+        from core.data_manager import DataManager
+        readiness_data = DataManager.get_readiness()
+        
+        ewma_a = readiness_data.get("today_ewma_a", 10.0)
+        ewma_c = readiness_data.get("today_ewma_c", 10.0)
+        l_a = 2.0 / 8.0
+        l_c = 2.0 / 29.0
+        next_a = (projected_trimp * l_a + (1.0 - l_a) * ewma_a) * 7.0
+        next_c = (projected_trimp * l_c + (1.0 - l_c) * ewma_c) * 7.0
+        new_acwr = round(next_a / max(3.0, next_c), 2)
 
         if new_acwr > 1.5:
-            advice = f"DANGER : Bascule en zone rouge (Risque blessure : {new_risk}%)."
+            advice = "DANGER : Bascule en zone rouge de surmenage."
             advice_color = "#E53E3E"
         elif new_acwr > 1.3:
-            advice = f"ATTENTION : Pic de charge (Risque blessure : {new_risk}%)."
+            advice = "ATTENTION : Pic de charge temporaire."
             advice_color = "#DD6B20"
         else:
-            advice = f"VALIDÉ : Charge bien absorbée (Risque blessure : {new_risk}%)."
+            advice = "VALIDÉ : Charge idéale pour progresser."
             advice_color = "#38A169"
 
         hours = int(est_duration_min // 60)
@@ -159,7 +182,6 @@ class WorkloadEngine:
             "duration_str": f"{hours}h{mins:02d}",
             "projected_trimp": projected_trimp,
             "new_acwr": new_acwr,
-            "new_risk": new_risk,
             "current_acwr": readiness_data["acwr"],
             "advice": advice,
             "advice_color": advice_color

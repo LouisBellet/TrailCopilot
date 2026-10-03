@@ -16,7 +16,8 @@ class DataManager:
         cls._readiness = None
         cls._summary_7d = None
         cls._coach_advice = None
-        cls._dirty_tabs = {0, 1, 2, 3}
+        # Invalide les 5 onglets : 0:Accueil, 1:Entraînement, 2:Conseiller, 3:DataScience, 4:Exploration
+        cls._dirty_tabs = {0, 1, 2, 3, 4}
 
     @classmethod
     def get_activities(cls):

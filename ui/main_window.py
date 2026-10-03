@@ -21,6 +21,7 @@ from ui.elevation_chart import ElevationChart
 from ui.home_view import HomeView
 from ui.training_view import TrainingView
 from ui.health_profile_view import HealthProfileView
+from ui.datascience_view import DataScienceView
 
 MASSIFS = {
     "Pyrénées — Gavarnie & Vignemale": {"center": [42.7290, -0.0450], "bbox": [-0.30, 42.60, 0.15, 42.85], "bera": "HAUTE-BIGORRE"},
@@ -64,8 +65,8 @@ class AnalysisWorker(QThread):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Mountain Scout — Décision Tactique & Charge Scientifique")
-        self.resize(1460, 930)
+        self.setWindowTitle("Mountain Scout — Décision Tactique & Science de la Performance")
+        self.resize(1480, 930)
         self.routes = []
         self.active_index = -1
         self.worker = None
@@ -75,15 +76,23 @@ class MainWindow(QMainWindow):
     def _setup_tabs(self):
         self.tab_widget = QTabWidget()
 
+        # Onglet 0 : Accueil (chargé au démarrage)
         self.tab_home = HomeView()
         self.tab_widget.addTab(self.tab_home, "🏠 Accueil & Synthèse")
 
+        # Onglet 1 : Entraînement (lazy loading)
         self.tab_training = TrainingView()
         self.tab_widget.addTab(self.tab_training, "📈 Entraînement")
 
+        # Onglet 2 : Conseiller (lazy loading)
         self.tab_coach = HealthProfileView()
         self.tab_widget.addTab(self.tab_coach, "🎯 Conseiller & Profil")
 
+        # Onglet 3 : Laboratoire Data Science (lazy loading)
+        self.tab_datascience = DataScienceView()
+        self.tab_widget.addTab(self.tab_datascience, "🧪 Lab Data Science")
+
+        # Onglet 4 : Exploration Tactique
         self.tab_explore = QWidget()
         self._setup_explore_ui(self.tab_explore)
         self.tab_widget.addTab(self.tab_explore, "🧭 Exploration Tactique")
@@ -104,6 +113,8 @@ class MainWindow(QMainWindow):
         elif index == 2:
             self.tab_coach.ensure_loaded()
         elif index == 3:
+            self.tab_datascience.ensure_loaded()
+        elif index == 4:
             if not self.routes and (self.worker is None or not self.worker.isRunning()):
                 self.launch_analysis()
 
@@ -119,6 +130,9 @@ class MainWindow(QMainWindow):
         elif curr == 2:
             self.tab_coach.refresh_coach_view()
             DataManager.mark_tab_clean(2)
+        elif curr == 3:
+            self.tab_datascience.refresh_analytics()
+            DataManager.mark_tab_clean(3)
 
     def _setup_explore_ui(self, parent_widget):
         main_layout = QVBoxLayout(parent_widget)
@@ -237,7 +251,6 @@ class MainWindow(QMainWindow):
         r = self.routes[index]
         has_track = r.get("has_track", False)
 
-        # Le bouton d'export GPX n'est actif que si une vraie trace existe
         self.btn_export.setEnabled(has_track)
         self.btn_open_web.setEnabled(True)
 
@@ -247,7 +260,6 @@ class MainWindow(QMainWindow):
         elevations = r.get("elevations", [])
         crit_segs = ev.get("critical_segments", [])
 
-        # Rendu du profil altimétrique
         self.elevation_chart.plot_profile(
             coords, elevations, r["title"],
             critical_segments=crit_segs,
@@ -258,7 +270,6 @@ class MainWindow(QMainWindow):
         dist_km = (len(coords) * 50.0) / 1000.0 if has_track else (d_plus / 100.0 * 0.7)
         sim = WorkloadEngine.simulate_route_impact(d_plus, dist_km)
 
-        # Bannière d'état de la trace
         if has_track:
             track_banner = """
             <div style='background:#1D2B24; border-left:4px solid #38A169; padding:6px 12px; margin-bottom:8px; border-radius:4px;'>
@@ -272,7 +283,6 @@ class MainWindow(QMainWindow):
             </div>
             """
 
-        # Encart des tronçons critiques
         if crit_segs:
             crit_html_list = "".join([
                 f"<li style='color:#FF5252;'><b>Du km {s['start_km']} au km {s['end_km']} :</b> {s['reason']}</li>"
@@ -330,7 +340,6 @@ class MainWindow(QMainWindow):
 
         center = MASSIFS[self.combo_massif.currentText()]["center"]
         self.map_view.render_routes_map(center, self.routes, active_route_id=r["id"])
-
 
     def open_current_web_page(self):
         if self.active_index >= 0:

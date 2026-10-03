@@ -33,22 +33,6 @@ def init_db():
         )
         """)
 
-        cursor.execute("PRAGMA table_info(profile)")
-        cols = [r["name"] for r in cursor.fetchall()]
-        if "height_cm" not in cols:
-            cursor.execute("ALTER TABLE profile ADD COLUMN height_cm REAL DEFAULT 178.0")
-        if "weight_kg" not in cols:
-            cursor.execute("ALTER TABLE profile ADD COLUMN weight_kg REAL DEFAULT 70.0")
-        if "age" not in cols:
-            cursor.execute("ALTER TABLE profile ADD COLUMN age INTEGER DEFAULT 30")
-        if "lactate_threshold_hr" not in cols:
-            cursor.execute("ALTER TABLE profile ADD COLUMN lactate_threshold_hr INTEGER DEFAULT 165")
-
-        cursor.execute("""
-        INSERT OR IGNORE INTO profile (id, height_cm, weight_kg, age, hr_rest, hr_max, vma, lactate_threshold_hr)
-        VALUES (1, 178.0, 70.0, 30, 50, 185, 15.0, 165)
-        """)
-
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS activities (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -64,12 +48,15 @@ def init_db():
             max_hr INTEGER,
             trimp REAL,
             rpe INTEGER DEFAULT 13,
-            records_json TEXT
+            records_json TEXT DEFAULT '[]'
         )
         """)
 
+        # Migration sécurisée des colonnes
         cursor.execute("PRAGMA table_info(activities)")
         act_cols = [r["name"] for r in cursor.fetchall()]
+        if "records_json" not in act_cols:
+            cursor.execute("ALTER TABLE activities ADD COLUMN records_json TEXT DEFAULT '[]'")
         if "rpe" not in act_cols:
             cursor.execute("ALTER TABLE activities ADD COLUMN rpe INTEGER DEFAULT 13")
 
@@ -110,6 +97,7 @@ def save_activity(act: dict) -> bool:
     with get_connection() as conn:
         cursor = conn.cursor()
         try:
+            records_str = json.dumps(act.get("records", []))
             cursor.execute("""
             INSERT INTO activities (
                 filename, start_time, name, sport, distance_km, 
@@ -131,7 +119,7 @@ def save_activity(act: dict) -> bool:
             """, (
                 act["filename"], act["start_time"], act["name"], act["sport"],
                 act["distance_km"], act["d_plus"], act["d_minus"], act["duration_min"],
-                act["avg_hr"], act["max_hr"], act["trimp"], act.get("rpe", 13), json.dumps(act.get("records", []))
+                act["avg_hr"], act["max_hr"], act["trimp"], act.get("rpe", 13), records_str
             ))
             conn.commit()
             return True
@@ -195,5 +183,12 @@ def get_activity_details(activity_id: int) -> dict:
         if not row:
             return {}
         data = dict(row)
-        data["records"] = json.loads(data["records_json"]) if data.get("records_json") else []
+        raw_rec = data.get("records_json")
+        if raw_rec:
+            try:
+                data["records"] = json.loads(raw_rec)
+            except Exception:
+                data["records"] = []
+        else:
+            data["records"] = []
         return data

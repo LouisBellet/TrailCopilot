@@ -2052,3 +2052,17 @@ Traceback (most recent call last):
     
 KeyboardInterrupt
 
+
+=== NOUVEAU CRASH ===
+Traceback (most recent call last):
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\main_window.py", line 116, in on_tab_changed
+    self.tab_datascience.ensure_loaded()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\datascience_view.py", line 91, in ensure_loaded
+    self.refresh_analytics()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\louis\Desktop\PERSO\TrailCopilot\ui\datascience_view.py", line 139, in refresh_analytics
+    ax2.bar(x, ieps, color="#63B3ED", width=0.55, alpha=0.85, label="IEP (km/h / Borg)")[cite: 2]
+                                                                                         ^^^^
+NameError: name 'cite' is not defined. Did you mean: 'aiter'?
+
